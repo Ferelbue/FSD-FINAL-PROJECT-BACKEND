@@ -10,7 +10,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/healthy', (req, res) => {
+app.get('/api/healthy', (req, res) => {
     res.status(200).json(
         {
             success: true,
