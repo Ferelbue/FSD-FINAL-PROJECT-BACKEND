@@ -1,5 +1,4 @@
 import { Category } from "../../models/Category";
-import { Role } from "../../models/Role";
 import { AppDataSource } from "../db";
 
 

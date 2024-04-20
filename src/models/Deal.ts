@@ -22,10 +22,10 @@ export class Deal extends BaseEntity {
     product!: Product;
 
     @Column({ type: 'boolean', default: false })
-    user_confirm!: boolean;
+    userUser_confirm!: boolean;
 
     @Column({ type: 'boolean', default: false })
-    product_confirm!: boolean;
+    userOwner_confirm!: boolean;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     deal_date!: Date;

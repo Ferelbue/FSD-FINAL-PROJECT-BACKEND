@@ -16,7 +16,7 @@ export class Product extends BaseEntity {
     @Column({ length: 50 })
     name!: string;
 
-    @Column({ length: 50 })
+    @Column({ length: 255 })
     description!: string;
 
     @Column({ length: 255 })

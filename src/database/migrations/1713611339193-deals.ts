@@ -29,12 +29,12 @@ export class Deals1713611339193 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: "user_confirm",
+                    name: "userUser_confirm",
                     type: "boolean",
                     default: false,
                 },
                 {
-                    name: "product_confirm",
+                    name: "userOwner_confirm",
                     type: "boolean",
                     default: false,
                 },
