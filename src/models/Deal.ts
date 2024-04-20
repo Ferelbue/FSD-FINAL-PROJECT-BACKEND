@@ -1,22 +1,23 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Unique } from "typeorm";
 import { User } from "./User";
 import { Product } from "./Product";
 
 @Entity('deals')
+@Unique("user_deal_unique", ["userUser", "product", "deal_date"])
 export class Deal extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, user => user.dealsAsOwner)
     @JoinColumn({ name: "userOwner_id" })
     userOwner!: User;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, user => user.dealsAsUser)
     @JoinColumn({ name: "userUser_id" })
     userUser!: User;
 
-    @ManyToOne(() => Product)
+    @ManyToOne(() => Product, product => product.deals)
     @JoinColumn({ name: "product_id" })
     product!: Product;
 

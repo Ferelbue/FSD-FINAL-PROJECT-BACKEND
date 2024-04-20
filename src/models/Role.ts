@@ -5,12 +5,17 @@ import { User } from "./User";
 export class Role extends BaseEntity {
 
     @PrimaryGeneratedColumn()
-    id!: number
+    id!: number;
 
-    @Column({ name: 'name' })
-    name!: string
+    @Column({ length: 50, unique: true })
+    name!: string;
 
-    @OneToMany(() => User, (user) => user.role)
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at!: Date;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+    updated_at!: Date;
+    
+    @OneToMany(() => User, user => user.role)
     users!: User[];
-
 }

@@ -1,4 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "./Product";
+import { OneToMany } from "typeorm";
 
 @Entity('categories')
 export class Category extends BaseEntity {
@@ -15,4 +17,6 @@ export class Category extends BaseEntity {
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
     updated_at!: Date;
     
+    @OneToMany(() => Product, product => product.category)
+    products!: Product[];
 }

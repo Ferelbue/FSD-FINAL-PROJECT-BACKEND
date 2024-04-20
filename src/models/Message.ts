@@ -11,15 +11,15 @@ export class Message extends BaseEntity {
     @Column({ type: 'varchar', length: 255 })
     message!: string;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, user => user.messagesAsOwner)
     @JoinColumn({ name: "userOwner_id" })
     userOwner!: User;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, user => user.messagesAsUser)
     @JoinColumn({ name: "userUser_id" })
     userUser!: User;
 
-    @ManyToOne(() => Product)
+    @ManyToOne(() => Product, product => product.messages)
     @JoinColumn({ name: "product_id" })
     product!: Product;
 

@@ -2,7 +2,6 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColu
 import { Product } from "./Product";
 
 @Entity('reviews')
-@Check("starts_check", "starts >= 0 AND starts <= 5")
 export class Review extends BaseEntity {
 
     @PrimaryGeneratedColumn()
@@ -15,9 +14,10 @@ export class Review extends BaseEntity {
     description!: string;
 
     @Column({ type: 'int' })
+    @Check("starts_check", "starts >= 0 AND starts <= 5")
     starts!: number;
 
-    @ManyToOne(() => Product)
+    @ManyToOne(() => Product, product => product.reviews)
     @JoinColumn({ name: "product_id" })
     product!: Product;
 }
