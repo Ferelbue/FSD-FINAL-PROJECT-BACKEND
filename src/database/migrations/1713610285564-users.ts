@@ -20,6 +20,12 @@ export class Users1713610285564 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: "lastName",
+                    type: "varchar",
+                    length: "50",
+                    isNullable: false,
+                },
+                {
                     name: "email",
                     type: "varchar",
                     length: "100",
@@ -39,7 +45,7 @@ export class Users1713610285564 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
-                    name: "password",
+                    name: "passwordHash",
                     type: "varchar",
                     length: "255",
                     isNullable: false,

@@ -32,9 +32,15 @@ export class Products1713611005530 implements MigrationInterface {
                     isNullable: false,
                 },
                 {
+                    name: "city",
+                    type: "varchar",
+                    length: "50",
+                    isNullable: false,
+                },
+                {
                     name: "starts",
                     type: "int",
-                    isNullable: false,
+                    default: 0,
                 },
                 {
                     name: "hourPrice",

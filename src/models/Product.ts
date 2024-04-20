@@ -22,6 +22,9 @@ export class Product extends BaseEntity {
     @Column({ length: 255 })
     image!: string;
 
+    @Column({ length: 50 })
+    city!: string;
+
     @Column({ type: 'int' })
     @Check("starts_check", "starts >= 0 AND starts <= 5")
     starts!: number;
