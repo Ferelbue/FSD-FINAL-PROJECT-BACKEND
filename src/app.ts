@@ -1,8 +1,7 @@
 
 import express from "express";
 import cors from "cors";
-
-
+import router from "./router";
 
 export const app = express();
 
@@ -17,3 +16,5 @@ app.get('/api/healthy', (req, res) => {
             message: "Server is healthy"
         })
 })
+
+app.use("/api", router)
