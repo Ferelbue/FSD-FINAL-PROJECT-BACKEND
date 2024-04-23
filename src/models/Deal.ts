@@ -9,15 +9,15 @@ export class Deal extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToOne(() => User, user => user.dealsAsOwner)
+    @ManyToOne(() => User, user => user.dealsAsOwner, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "userOwner_id" })
     userOwner!: User;
 
-    @ManyToOne(() => User, user => user.dealsAsUser)
+    @ManyToOne(() => User, user => user.dealsAsUser, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "userUser_id" })
     userUser!: User;
 
-    @ManyToOne(() => Product, product => product.deals)
+    @ManyToOne(() => Product, product => product.deals, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "product_id" })
     product!: Product;
 

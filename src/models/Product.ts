@@ -41,11 +41,11 @@ export class Product extends BaseEntity {
     @Column({ type: 'boolean', default: true })
     available!: boolean;
 
-    @ManyToOne(() => Category, category => category.products)
+    @ManyToOne(() => Category, category => category.products, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "category_id" })
     category!: Category;
 
-    @ManyToOne(() => User, user => user.products)
+    @ManyToOne(() => User, user => user.products, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "owner_id" })
     owner!: User;
 

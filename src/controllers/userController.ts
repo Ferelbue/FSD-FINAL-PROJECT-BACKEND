@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { User } from "../models/User"
 import { FindOperator, Like } from "typeorm"
 import bcrypt from "bcrypt";
+import { error } from "console";
 
 
 //GET USER PROFILE
@@ -30,7 +31,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
                     products: {
                         id: true,
                         name: true
-                        },
+                    },
                     role: {
                         name: true,
                     }
@@ -64,116 +65,6 @@ export const getUserProfile = async (req: Request, res: Response) => {
     }
 }
 
-//GET USER PROFILE
-export const getUsers = async (req: Request, res: Response) => {
-
-    try {
-        const userRole = req.tokenData.roleName
-        const userId = req.tokenData.userId
-
-        // const limit = Number(req.query.limit) || 10;
-        // const page = Number(req.query.page) || 1;
-        // const skip = (page - 1) * limit;
-        //RECUPERAR DATOS DE LA BUSQUEDA
-        // Crear interface con el parametro de busqueda email que es de tipo FindOperator<string>
-        interface queryFilters {
-            email?: FindOperator<string>,
-
-        }
-        // Se declara la constante queryFiters de tipo queryFilters
-        const queryFilters: queryFilters = {}
-
-        if (req.query.email) {
-            queryFilters.email = Like("%" + req.query.email.toString() + "%");
-        }
-        // if (req.query.name) {
-        //     queryFilters.name = Like("%" + req.query.name.toString() + "%");
-        // }
-        // if (req.query.lastName) {
-        //     queryFilters.lastName = Like("%" + req.query.lastName.toString() + "%");
-        // }
-
-        if (userRole === "user") {
-            //CONSULTA. Busqueda con los parametros de la query
-            const user = await User.find(
-                {
-                    where: {
-                        id: userId
-                    },
-                    relations: {
-                        role: true
-                    },
-                    select: {
-                        id: true,
-                        name: true,
-                        email: true,
-                        role: {
-                            name: true,
-                        }
-                    }
-                }
-            )
-
-            // VALIDACION
-            if (user.length === 0) {
-                return res.status(404).json({
-                    success: false,
-                    message: "Email not found",
-
-                })
-            }
-
-            // RESPUESTA
-            res.status(200).json(
-                {
-                    success: true,
-                    message: "User retrieved successfully",
-                    data: user
-                }
-            )
-
-        } else {
-
-            const userAll = await User.find(
-                {
-                    where: queryFilters,
-                    relations: {
-                        role: true
-                    },
-                    select: {
-                        id: true,
-                        name: true,
-                        image: true,
-                        email: true,
-                        role: {
-                            name: true,
-                        }
-                    }
-                }
-            )
-
-
-            // RESPUESTA
-            res.status(200).json(
-                {
-                    success: true,
-                    message: "Email retrieved successfully",
-                    data: userAll
-                }
-            )
-
-
-        }
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Email cant be retrieved",
-            error: error
-        })
-    }
-}
-
 //MODIFY USER PROFILE
 export const updateUserProfile = async (req: Request, res: Response) => {
     try {
@@ -182,8 +73,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
         let lastName = req.body.lastName
         let email = req.body.email
         let image = req.body.image
-        let password = req.body.password
-        let newPassword = req.body.newPassword
+        let city = req.body.city
         const userId = req.tokenData.userId
 
         const user = await User.findOne(
@@ -216,7 +106,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
 
         }
 
-        if (!name && !lastName && !email && !password) {
+        if (!name && !lastName && !email && !city) {
 
             return res.status(400).json({
                 succes: false,
@@ -228,19 +118,18 @@ export const updateUserProfile = async (req: Request, res: Response) => {
             name = user?.name
         }
 
-        if (!password) {
-            password = user?.passwordHash
-        }
-
         if (!lastName) {
             lastName = user?.lastName
         }
-        let flag = false;
 
         if (!email) {
             email = user?.email
-            flag = true;
         }
+
+        if (!city) {
+            city = user?.city
+        }
+
         if (name?.length > 50) {
 
             return res.status(400).json({
@@ -275,46 +164,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
             }
         )
 
-        // if (exist && !flag) {
-        //     return res.status(406).json({
-        //         success: false,
-        //         message: "Email already registered"
-        //     })
-        // }
-
-
-        //validacion password
-        if (newPassword) {
-            if (newPassword.length < 6 || newPassword.length > 10) {
-                return res.status(401).json({
-                    success: false,
-                    message: "Incorrect new password, min 6 max 10 characters"
-                })
-
-            }
-        }
-
-        if (newPassword) {
-
-            const passwordEqual = bcrypt.compareSync(password, user.passwordHash)
-
-            if ((newPassword.length > 0) && (passwordEqual == true)) {
-
-                const newPasswordEncrypted = bcrypt.hashSync(newPassword, 8)
-                password = newPasswordEncrypted;
-
-            } else {
-                return res.status(200).json(
-                    {
-                        success: true,
-                        message: "Old password incorrect"
-                    })
-
-            }
-        }
-
-
-        // Actualizar datos en la
+        // Actualizar datos en la BD
         const userUpdated = await User.update(
             {
                 id: userId
@@ -324,7 +174,7 @@ export const updateUserProfile = async (req: Request, res: Response) => {
                 lastName: lastName,
                 image: image,
                 email: email,
-                passwordHash: password,
+                city: city,
             }
         )
 
@@ -343,15 +193,13 @@ export const updateUserProfile = async (req: Request, res: Response) => {
                     lastName: true,
                     image: true,
                     email: true,
+                    city: true,
                     role: {
                         name: true,
                     }
                 }
             }
         )
-
-
-
 
         //Response
         return res.status(200).json(
@@ -360,7 +208,6 @@ export const updateUserProfile = async (req: Request, res: Response) => {
                 message: "User updated succesfully",
                 data: user2
             })
-
 
     } catch (error) {
         res.status(500).json({
@@ -371,66 +218,73 @@ export const updateUserProfile = async (req: Request, res: Response) => {
     }
 }
 
-//MODIFY USER ROLE
-export const updateUserRole = async (req: Request, res: Response) => {
+//GET USER PROFILE
+export const getUsers = async (req: Request, res: Response) => {
     try {
-        //Recuperar parametros de la ruta
-        const role = req.body.role
-        const userId = req.params.id
-
-
-        // Validacion
-        if (role != "1" && role != "2" && role != "3") {
-            return res.status(400).json({
-                succes: false,
-                message: "Incorrect role"
-            })
+        const limit = Number(req.query.limit) || 10;
+        const page = Number(req.query.page) || 1;
+        const skip = (page - 1) * limit;
+        //RECUPERAR DATOS DE LA BUSQUEDA
+        //Crear interface con el parametro de busqueda email que es de tipo FindOperator<string>
+        interface queryFilters {
+            email?: FindOperator<string>,
+            firstName?: FindOperator<string>,
+            lastName?: FindOperator<string>,
+            is_active?: boolean,
         }
-
-
-        // Actualizar datos
-        const userUpdated = await User.update(
+        // Se declara la constante queryFiters de tipo queryFilters
+        const queryFilters: queryFilters = {}
+        if (req.query.email) {
+            queryFilters.email = Like("%" + req.query.email.toString() + "%");
+        }
+        if (req.query.firstName) {
+            queryFilters.firstName = Like("%" + req.query.firstName.toString() + "%");
+        }
+        if (req.query.lastName) {
+            queryFilters.lastName = Like("%" + req.query.lastName.toString() + "%");
+        }
+        queryFilters.is_active = true;
+        //CONSULTA. Busqueda con los parametros de la query
+        const user = await User.find(
             {
-                id: parseInt(userId)
-            },
-            {
-                role: role
-            }
-        )
-
-        //Recuper los datos para mostrarlos en la respuesta
-        const user = await User.findOne(
-            {
-                where: {
-                    id: parseInt(userId)
-                },
+                where: queryFilters,
                 relations: {
                     role: true
                 },
                 select: {
                     id: true,
                     name: true,
+                    lastName: true,
                     email: true,
-                    passwordHash: true,
+                    image: true,
+                    city: true,
                     role: {
                         name: true,
                     }
-                }
+                },
+                take: limit,
+                skip: skip
             }
         )
-
-        //Response
+        // VALIDACION
+        if (user.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Email not found",
+            })
+        }
+        // RESPUESTA
         res.status(200).json(
             {
                 success: true,
-                message: "User role updated succesfully",
+                message: "Email retrieved successfully",
                 data: user
-            })
-
+            }
+        )
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Can't create rol",
+            message: "Email cant be retrieved",
             error: error
         })
     }
@@ -448,6 +302,7 @@ export const deleteUser = async (req: Request, res: Response) => {
             id: parseInt(userId)
         })
 
+
         // VALIDACION
         if (!user) {
             return res.status(404).json({
@@ -457,7 +312,8 @@ export const deleteUser = async (req: Request, res: Response) => {
         }
 
 
-        if (userRole !== "user" || (userId === tokenUserId)) {
+        if (userRole !== "user") {
+
             // ACTUALIZAR EN BD
             const userDeleted = await User.remove(user)
 
@@ -466,6 +322,28 @@ export const deleteUser = async (req: Request, res: Response) => {
                 success: true,
                 message: "USER DELETED SUCCESSFULLY",
                 data: userDeleted
+            })
+        } else if ((userId === tokenUserId)) {
+
+            const userUpdated = await User.update(
+                {
+                    id: parseInt(tokenUserId)
+                },
+                {
+                    is_active: false
+                }
+            )
+            // RESPONDER
+            return res.status(200).json({
+                success: true,
+                message: "USER DELETED SUCCESSFULLY",
+                data: userUpdated
+            })
+
+        } else {
+            return res.status(401).json({
+                success: false,
+                message: "UNAUTHORIZED"
             })
         }
 
@@ -478,63 +356,158 @@ export const deleteUser = async (req: Request, res: Response) => {
     }
 }
 
+//MODIFY USER ROLE
+export const updateUserRole = async (req: Request, res: Response) => {
+    try {
+        //Recuperar parametros de la ruta
+        const role = req.body.role
+        const userId = req.params.id
+        const userRole = req.tokenData.roleName
+        let roleNumber = 0;
+
+        // Validacion
+        if (role != "user" && role != "admin" && role != "super-admin") {
+            return res.status(400).json({
+                succes: false,
+                message: "Incorrect role"
+            })
+        }
+
+        const user1 = await User.findOneBy({
+            id: parseInt(userId)
+        })
+        // VALIDACION
+        if (!user1) {
+            return res.status(404).json({
+                success: false,
+                message: "USER NOT FOUND"
+            })
+        }
+
+
+        if (userRole === "super-admin") {
+            if (role === "user") {
+                roleNumber = 1
+            }
+            if (role === "admin") {
+                roleNumber = 2
+            }
+            if (role === "super-admin") {
+                roleNumber = 3
+            }
+
+            // Actualizar datos
+            const userUpdated = await User.update(
+                {
+                    id: parseInt(userId)
+                },
+                {
+                    role: { id: roleNumber }
+                }
+            )
+
+            //Recuper los datos para mostrarlos en la respuesta
+            const user = await User.findOne(
+                {
+                    where: {
+                        id: parseInt(userId)
+                    },
+                    relations: {
+                        role: true
+                    },
+                    select: {
+                        id: true,
+                        name: true,
+                        email: true,
+                        passwordHash: true,
+                        role: {
+                            name: true,
+                        }
+                    }
+                }
+            )
+
+            //Response
+            res.status(200).json(
+                {
+                    success: true,
+                    message: "User role updated succesfully",
+                    data: user
+                })
+        } else
+            return res.status(401).json({
+                success: false,
+                message: "UNAUTHORIZED"
+            })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Can't create rol",
+            error: error
+        })
+    }
+}
+
 export const getUserByID = async (req: Request, res: Response) => {
 
     try {
         //RECUPERAR DATOS
         const userId = req.params.id
         const roleName = req.tokenData.roleName
+        const userRole = req.tokenData.roleName
 
-        //Consultar y recuperar de la DB
-        const user = await User.findOne(
-            {
-                where: {
-                    id: parseInt(userId)
-                },
-                relations: [
-                    'role',
-                    'appointments',
-                    'appointments.service',
-                ],
-                select: {
-                    id: true,
-                    name: true,
-                    lastName: true,
-                    image: true,
-                    email: true,
-                    // appointments: {
-                    //     appointmentDate: true,
-                    //     service: {
-                    //         serviceName: true,
-                    //         description: true
-                    //     },
-                    // },
-                    role: {
+        if (userRole === "super-admin") {
+
+            const user = await User.findOne(
+                {
+                    where: {
+                        id: parseInt(userId)
+                    },
+                    relations: [
+                        'products',
+                    ],
+                    select: {
+                        id: true,
                         name: true,
+                        lastName: true,
+                        image: true,
+                        email: true,
+                        products: {
+                            id: true,
+                            name: true
+                        },
+                        role: {
+                            name: true,
+                        }
                     }
+
                 }
+            )
 
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: "User not found",
+                    data: user
+
+                })
             }
-        )
 
-        // VALIDAR
-        if (!user) {
-            return res.status(404).json({
+            //Response
+            res.status(200).json(
+                {
+                    success: true,
+                    message: "User retrieved succesfully",
+                    data: user
+                })
+        } else
+            return res.status(401).json({
                 success: false,
-                message: "User not found",
-
+                message: "UNAUTHORIZED",
+                data: error
             })
-        }
 
-
-        // RESPONDER
-        res.status(200).json(
-            {
-                success: true,
-                message: "User retrieved successfully",
-                data: user
-            }
-        )
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -552,8 +525,7 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
         let lastName = req.body.lastName
         let email = req.body.email
         let image = req.body.image
-        let password = req.body.password
-        let newPassword = req.body.newPassword
+        let city = req.body.city
         const userId = parseInt(req.params.id)
 
         const user = await User.findOne(
@@ -586,7 +558,7 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
 
         }
 
-        if (!name && !lastName && !email && !password) {
+        if (!name && !lastName && !email && !city) {
 
             return res.status(400).json({
                 succes: false,
@@ -598,19 +570,18 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
             name = user?.name
         }
 
-        if (!password) {
-            password = user?.passwordHash
+        if (!city) {
+            city = user?.city
         }
 
         if (!lastName) {
             lastName = user?.lastName
         }
-        let flag = false;
 
         if (!email) {
             email = user?.email
-            flag = true;
         }
+
         if (name?.length > 50) {
 
             return res.status(400).json({
@@ -645,45 +616,6 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
             }
         )
 
-        // if (exist && !flag) {
-        //     return res.status(406).json({
-        //         success: false,
-        //         message: "Email already registered"
-        //     })
-        // }
-
-
-        //validacion password
-        if (newPassword) {
-            if (newPassword.length < 6 || newPassword.length > 10) {
-                return res.status(401).json({
-                    success: false,
-                    message: "Incorrect new password, min 6 max 10 characters"
-                })
-
-            }
-        }
-
-        if (newPassword) {
-
-            const passwordEqual = bcrypt.compareSync(password, user.passwordHash)
-
-            if ((newPassword.length > 0) && (passwordEqual == true)) {
-
-                const newPasswordEncrypted = bcrypt.hashSync(newPassword, 8)
-                password = newPasswordEncrypted;
-
-            } else {
-                return res.status(200).json(
-                    {
-                        success: true,
-                        message: "Old password incorrect"
-                    })
-
-            }
-        }
-
-
         // Actualizar datos en la
         const userUpdated = await User.update(
             {
@@ -694,7 +626,7 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
                 lastName: lastName,
                 image: image,
                 email: email,
-                passwordHash: password,
+                city: city,
             }
         )
 
@@ -705,13 +637,14 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
                     id: userId
                 },
                 relations: {
-                    role: true
+                    role: true,
                 },
                 select: {
                     id: true,
                     name: true,
                     lastName: true,
                     image: true,
+                    city: true,
                     email: true,
                     role: {
                         name: true,
@@ -719,9 +652,6 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
                 }
             }
         )
-
-
-
 
         //Response
         return res.status(200).json(

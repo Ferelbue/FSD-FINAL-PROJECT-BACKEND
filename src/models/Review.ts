@@ -17,7 +17,7 @@ export class Review extends BaseEntity {
     @Check("starts_check", "starts >= 0 AND starts <= 5")
     starts!: number;
 
-    @ManyToOne(() => Product, product => product.reviews)
+    @ManyToOne(() => Product, product => product.reviews, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "product_id" })
     product!: Product;
 }

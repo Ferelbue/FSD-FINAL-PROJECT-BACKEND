@@ -427,7 +427,7 @@ export const productSeedDatabase = async () => {
         await product30.save();
 
         console.log("---------------------------------------")
-        console.log("++++++++ USUARIOS CREADOS (10) ++++++++")
+        console.log("++++++++ PRODUCTS CREADOS (30) ++++++++")
         console.log("---------------------------------------")
 
     } catch (error) {

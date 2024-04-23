@@ -22,7 +22,7 @@ export class Products1713611005530 implements MigrationInterface {
                 {
                     name: "description",
                     type: "varchar",
-                    length: "50",
+                    length: "255",
                     isNullable: false,
                 },
                 {

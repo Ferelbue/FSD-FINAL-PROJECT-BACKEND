@@ -85,7 +85,7 @@ export const categorySeedDatabase = async () => {
         await productCategory13.save();
 
         console.log("---------------------------------------")
-        console.log("++++++++++ CATEGORIES CREADAS (13) ++++++++++")
+        console.log("+++++++ CATEGORIES CREADAS (13) +++++++")
         console.log("---------------------------------------")
 
     } catch (error) {
