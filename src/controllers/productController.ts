@@ -1,8 +1,9 @@
 import { Request, Response } from "express"
 import { Product } from "../models/Product"
 import { FindOperator, Like } from "typeorm";
+import { da } from "@faker-js/faker";
 
-//GET SERVICE
+//GET ALL PRODUCTS
 export const getProducts = async (req: Request, res: Response) => {
     try {
         const limit = Number(req.query.limit) || 10;
@@ -58,40 +59,166 @@ export const getProducts = async (req: Request, res: Response) => {
     }
 }
 
-// //CREATE SERVICE
-// export const createProduct = async (req: Request, res: Response) => {
+//GET ONE PRODUCT
+export const getProductById = async (req: Request, res: Response) => {
 
-//     try {
-//         const serviceName = req.body.serviceName;
-//         const description = req.body.description;
-//         const image = req.body.image;
+        try {
+             //RECUPERAR DATOS
+            const productId = req.params.id
+    
+             //Consultar y recuperar de la DB
+            const product = await Product.findOne(
+                {
+                    where: {
+                        id: parseInt(productId)
+                    },
+                   select: {
+                        id: true,
+                        name: true,
+                        description: true,
+                        image: true,
+                        city: true,
+                        hourPrice: true,
+                        dayPrice: true,
+                        depositPrice: true,
+                        starts: true,
+                    }
+                }
+            )
+    
+             // VALIDAR
+             if (!product) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Product not found",
+    
+                })
+            }
+    
+    
+             // RESPONDER
+            res.status(200).json(
+                {
+                    success: true,
+                    message: "Product retrieved successfully",
+                    data: product
+                }
+            )
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: "Product cant be retrieved",
+                error: error
+            })
+    } 
+} 
 
+//GET MY PRODUCTS
+export const getMyProducts = async (req: Request, res: Response) => {
+
+    try {
+         //RECUPERAR DATOS
+         const userId = req.tokenData.userId
+         //Consultar y recuperar de la DB
+        const product = await Product.find(
+            {
+                where: {
+                    owner: {id:userId}
+                },
+               select: {
+                    id: true,
+                    name: true,
+                    description: true,
+                    image: true,
+                    city: true,
+                    hourPrice: true,
+                    dayPrice: true,
+                    depositPrice: true,
+                    starts: true,
+                }
+            }
+        )
+
+         // VALIDAR
+         if (product.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Service not found",
+
+            })
+        }
+
+         // RESPONDER
+        res.status(200).json(
+            {
+                success: true,
+                message: "Service retrieved successfully",
+                data: product
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Service cant be retrieved",
+            error: error
+        })
+    } 
+} 
+
+//CREATE PRODUCT
+export const createProduct = async (req: Request, res: Response) => {
+
+    try {
+        const productName = req.body.name;
+        const description = req.body.description;
+        const image = req.body.image;
+        const city = req.body.city;
+        const hourPrice = req.body.hourPrice;
+        const dayPrice = req.body.dayPrice;
+        const depositPrice = req.body.depositPrice;
+        const categoryId = req.body.category;
+        const ownerId = req.tokenData.userId;
+
+        //Validar datos
+        if (!productName || !description || !image || !city || !hourPrice || !dayPrice || !depositPrice || !categoryId || !ownerId) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing data",
+                data: req.body
+            })
+        }       
         
+        const newProduct = await Product.create({
+            name: productName,
+            description: description,
+            image:image,
+            city: city,
+            hourPrice: hourPrice,
+            dayPrice: dayPrice,
+            depositPrice: depositPrice,
+            category: {id: categoryId},
+            owner: {id: ownerId}
+        }).save()
         
-//         const newUser = await Service.create({
-//             serviceName: serviceName,
-//             description: description,
-//             image:image,
-//         }).save()
-        
-//         console.log(newUser)
-//         res.status(201).json(
-//             {
-//                 success: false,
-//                 message: "Service registered successfully"
-//             }
-//         )
+        console.log(newProduct)
+        res.status(201).json(
+            {
+                success: false,
+                message: "Product registered successfully",
+                data: newProduct
+            }
+        )
 
-//     } catch (error) {
-//         res.status(500).json({
-//             success: false,
-//             message: "Service cant be created",
-//             error: error
-//         })
-//     }
-// }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Product cant be created",
+            error: error
+        })
+    }
+}
 
-// //MODIFY SERVICE
+//MODIFY SERVICE
 // export const updateProduct = async (req: Request, res: Response) => {
 //     try {
 //         const userId = req.params.id;
@@ -189,51 +316,4 @@ export const getProducts = async (req: Request, res: Response) => {
 //     }
 // }
 
-// export const getProductByID = async (req: Request, res: Response) => {
-
-//     try {
-//         //RECUPERAR DATOS
-//         const serviceId = req.params.id
-
-//         //Consultar y recuperar de la DB
-//         const service = await Service.findOne(
-//             {
-//                 where: {
-//                     id: parseInt(serviceId)
-//                 },
-//                 select: {
-//                     id: true,
-//                     serviceName: true,
-//                     description: true,
-//                     image: true
-//                 }
-//             }
-//         )
-
-//         // VALIDAR
-//         if (!service) {
-//             return res.status(404).json({
-//                 success: false,
-//                 message: "Service not found",
-
-//             })
-//         }
-
-
-//         // RESPONDER
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: "Service retrieved successfully",
-//                 data: service
-//             }
-//         )
-//     } catch (error) {
-//         res.status(500).json({
-//             success: false,
-//             message: "User cant be retrieved",
-//             error: error
-//         })
-//     }
-
-// }
+// 
