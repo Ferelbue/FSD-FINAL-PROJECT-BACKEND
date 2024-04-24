@@ -1,12 +1,26 @@
 import { Request, Response } from "express"
 import { Product } from "../models/Product"
+import { FindOperator, Like } from "typeorm";
 
 //GET SERVICE
 export const getProducts = async (req: Request, res: Response) => {
     try {
+        const limit = Number(req.query.limit) || 10;
+        const page = Number(req.query.page) || 1;
+        const skip = (page - 1) * limit;
+
+        interface queryFilters {
+            name?: FindOperator<string>
+        }
+        const queryFilters: queryFilters = {}
+        if (req.query.name) {
+            queryFilters.name = Like("%" + req.query.name.toString() + "%");
+        }
+
         //Consultar en base de datos
-        const users = await Product.find(
+        const products = await Product.find(
             {
+                where: queryFilters,
                 select: {
                     id: true,
                     name: true,
@@ -16,21 +30,29 @@ export const getProducts = async (req: Request, res: Response) => {
                     hourPrice: true,
                     dayPrice: true,
                     starts: true,
-                }
+                },
+                take: limit,
+                skip: skip
             }
         )
+        if (products.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Any product found"
+            })
+        }
         res.status(200).json(
             {
                 success: true,
-                message: "Users retrieved successfully",
-                data: users
+                message: "Products retrieved successfully",
+                data: products
             }
         )
 
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Users cant be retrieved",
+            message: "Products cant be retrieved",
             error: error
         })
     }
