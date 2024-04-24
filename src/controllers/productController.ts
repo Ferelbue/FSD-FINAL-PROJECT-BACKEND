@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { Product } from "../models/Product"
 import { FindOperator, Like } from "typeorm";
-import { da } from "@faker-js/faker";
+import { da, tr } from "@faker-js/faker";
 
 //GET ALL PRODUCTS
 export const getProducts = async (req: Request, res: Response) => {
@@ -62,70 +62,17 @@ export const getProducts = async (req: Request, res: Response) => {
 //GET ONE PRODUCT
 export const getProductById = async (req: Request, res: Response) => {
 
-        try {
-             //RECUPERAR DATOS
-            const productId = req.params.id
-    
-             //Consultar y recuperar de la DB
-            const product = await Product.findOne(
-                {
-                    where: {
-                        id: parseInt(productId)
-                    },
-                   select: {
-                        id: true,
-                        name: true,
-                        description: true,
-                        image: true,
-                        city: true,
-                        hourPrice: true,
-                        dayPrice: true,
-                        depositPrice: true,
-                        starts: true,
-                    }
-                }
-            )
-    
-             // VALIDAR
-             if (!product) {
-                return res.status(404).json({
-                    success: false,
-                    message: "Product not found",
-    
-                })
-            }
-    
-    
-             // RESPONDER
-            res.status(200).json(
-                {
-                    success: true,
-                    message: "Product retrieved successfully",
-                    data: product
-                }
-            )
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                message: "Product cant be retrieved",
-                error: error
-            })
-    } 
-} 
-
-//GET MY PRODUCTS
-export const getMyProducts = async (req: Request, res: Response) => {
-
     try {
-         //RECUPERAR DATOS
-         const userId = req.tokenData.userId
-         //Consultar y recuperar de la DB
-        const product = await Product.find(
+        //RECUPERAR DATOS
+        const productId = req.params.id
+
+        //Consultar y recuperar de la DB
+        const product = await Product.findOne(
             {
                 where: {
-                    owner: {id:userId}
+                    id: parseInt(productId)
                 },
-               select: {
+                select: {
                     id: true,
                     name: true,
                     description: true,
@@ -139,8 +86,61 @@ export const getMyProducts = async (req: Request, res: Response) => {
             }
         )
 
-         // VALIDAR
-         if (product.length === 0) {
+        // VALIDAR
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Product not found",
+
+            })
+        }
+
+
+        // RESPONDER
+        res.status(200).json(
+            {
+                success: true,
+                message: "Product retrieved successfully",
+                data: product
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Product cant be retrieved",
+            error: error
+        })
+    }
+}
+
+//GET MY PRODUCTS
+export const getMyProducts = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        const userId = req.tokenData.userId
+        //Consultar y recuperar de la DB
+        const product = await Product.find(
+            {
+                where: {
+                    owner: { id: userId }
+                },
+                select: {
+                    id: true,
+                    name: true,
+                    description: true,
+                    image: true,
+                    city: true,
+                    hourPrice: true,
+                    dayPrice: true,
+                    depositPrice: true,
+                    starts: true,
+                }
+            }
+        )
+
+        // VALIDAR
+        if (product.length === 0) {
             return res.status(404).json({
                 success: false,
                 message: "Service not found",
@@ -148,7 +148,7 @@ export const getMyProducts = async (req: Request, res: Response) => {
             })
         }
 
-         // RESPONDER
+        // RESPONDER
         res.status(200).json(
             {
                 success: true,
@@ -162,8 +162,8 @@ export const getMyProducts = async (req: Request, res: Response) => {
             message: "Service cant be retrieved",
             error: error
         })
-    } 
-} 
+    }
+}
 
 //CREATE PRODUCT
 export const createProduct = async (req: Request, res: Response) => {
@@ -186,20 +186,20 @@ export const createProduct = async (req: Request, res: Response) => {
                 message: "Missing data",
                 data: req.body
             })
-        }       
-        
+        }
+
         const newProduct = await Product.create({
             name: productName,
             description: description,
-            image:image,
+            image: image,
             city: city,
             hourPrice: hourPrice,
             dayPrice: dayPrice,
             depositPrice: depositPrice,
-            category: {id: categoryId},
-            owner: {id: ownerId}
+            category: { id: categoryId },
+            owner: { id: ownerId }
         }).save()
-        
+
         console.log(newProduct)
         res.status(201).json(
             {
@@ -219,70 +219,131 @@ export const createProduct = async (req: Request, res: Response) => {
 }
 
 //MODIFY SERVICE
-// export const updateProduct = async (req: Request, res: Response) => {
-//     try {
-//         const userId = req.params.id;
-//         const serviceName = req.body.serviceName;
-//         const description = req.body.description;
-//         const image = req.body.image;
-
-//         //Validar datos
-//         const user = await Service.findOneBy(
-//             {
-//                 id: parseInt(userId)
-//             }
-//         )
-
-//         if (!user) {
-//             return res.status(404).json({
-//                 success: false,
-//                 message: "User not found",
-
-//             })
-
-//         }
-
-//         // Tratar datos
+export const updateProduct = async (req: Request, res: Response) => {
+    try {
+        const productId = req.params.id;
+        let productName = req.body.name;
+        let description = req.body.description;
+        let image = req.body.image;
+        let city = req.body.city;
+        let hourPrice = req.body.hourPrice;
+        let dayPrice = req.body.dayPrice;
+        let depositPrice = req.body.depositPrice;
+        let categoryId = req.body.category;
+        const ownerId = req.tokenData.userId;
 
 
+        console.log(productId)
+        console.log(ownerId, "ownerId")
+        //Validar datos
+        const product = await Product.find(
+            {
+                where: {
+                    id: parseInt(productId),
+                },
+                relations: {
+                    owner: true,
+                    category: true
+                },
+                select: {
+                    name: true,
+                    description: true,
+                    image: true,
+                    city: true,
+                    hourPrice: true,
+                    dayPrice: true,
+                    depositPrice: true,
+                    owner: { id: true },
+                    category: { id: true },
+                }
+            }
+        )
 
-//         // Actualizar datos
-//         const serviceUpdated = await Service.update(
-//             {
-//                 id: parseInt(userId)
-//             },
-//             {
-//                 serviceName: serviceName,
-//                 description: description,
-//                 image: image
-//             },
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Product not found",
 
-//         )
+            })
 
-//         const servicePrint = await Service.findOneBy(
-//             {
-//                 id: parseInt(userId)
-//             }
-//         )
+        }
+
+        if (product[0].owner.id !== ownerId) {
+            return res.status(403).json({
+                success: false,
+                message: "You are not the owner of this product",
+            })
+        }
+
+        // Tratar datos
+        if (!productName) {
+            productName = product[0].name
+        }
+        if (!description) {
+            description = product[0].description
+        }
+        if (!image) {
+            image = product[0].image
+        }
+        if (!city) {
+            city = product[0].city
+        }
+        if (!hourPrice) {
+            hourPrice = product[0].hourPrice
+        }
+        if (!dayPrice) {
+            dayPrice = product[0].dayPrice
+        }
+        if (!depositPrice) {
+            depositPrice = product[0].depositPrice
+        }
+        if (!categoryId) {
+            categoryId = product[0].category.id
+        }
+
+        // Actualizar datos
+        const serviceUpdated = await Product.update(
+            {
+                id: parseInt(productId)
+            },
+            {
+                name: productName,
+                description: description,
+                image: image,
+                city: city,
+                hourPrice: hourPrice,
+                dayPrice: dayPrice,
+                depositPrice: depositPrice,
+                category: { id: categoryId },
+                owner: { id: ownerId }
+            },
+
+        )
+
+        const servicePrint = await Product.findOneBy(
+            {
+                id: parseInt(productId)
+            }
+        )
 
 
-//         // Responder
-//         res.status(200).json(
-//             {
-//                 success: true,
-//                 message: "Service updated successfully",
-//                 data: servicePrint
-//             }
-//         )
+        // Responder
+        res.status(200).json(
+            {
+                success: true,
+                message: "Product updated successfully",
+                data: servicePrint
+            }
+        )
 
-//     } catch (error) {
-//         res.status(500).json({
-//             success: false,
-//             message: "Service cant be update",
-//             error: error
-//         })
-//     }
-// }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Product cant be update",
+            error: error
+        })
+    }
+}
 
 // //DELETE SERVICE
 // export const deleteProduct = async (req: Request, res: Response) => {
