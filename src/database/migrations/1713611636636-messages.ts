@@ -45,9 +45,25 @@ export class Messages1713611636636 implements MigrationInterface {
                     default: false,
                 },
                 {
+                    name: "userOwner_author",
+                    type: "boolean",
+                    default: false,
+                },
+                {
+                    name: "userUser_author",
+                    type: "boolean",
+                    default: false,
+                },
+                {
                     name: "created_at",
                     type: "timestamp",
                     default: "CURRENT_TIMESTAMP",
+                },
+                {
+                    name: "updated_at",
+                    type: "timestamp",
+                    default: "CURRENT_TIMESTAMP",
+                    onUpdate: "CURRENT_TIMESTAMP",
                 }
             ],
             foreignKeys: [

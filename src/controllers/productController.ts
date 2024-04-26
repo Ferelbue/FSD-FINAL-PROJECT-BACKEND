@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import { Product } from "../models/Product"
 import { FindOperator, Like } from "typeorm";
-import { da, fa, tr } from "@faker-js/faker";
 import { FavoriteProduct } from "../models/FavoriteProduct";
 import { Review } from "../models/Review";
 import { Deal } from "../models/Deal";

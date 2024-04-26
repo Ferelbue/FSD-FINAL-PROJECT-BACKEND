@@ -29,6 +29,15 @@ export class Message extends BaseEntity {
     @Column({ type: 'boolean', default: false })
     userUser_notification!: boolean;
 
+    @Column({ type: 'boolean', default: false })
+    userOwner_author!: boolean;
+
+    @Column({ type: 'boolean', default: false })
+    userUser_author!: boolean;
+
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     created_at!: Date;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+    updated_at!: Date;
 }
