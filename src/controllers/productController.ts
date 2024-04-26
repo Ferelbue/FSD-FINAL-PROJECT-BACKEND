@@ -534,6 +534,68 @@ export const reviewProduct = async (req: Request, res: Response) => {
     }
 }
 
+// GET PRODUCT REVIEWS
+export const productReviews = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        const productId = req.params.id
+        const arrayReviews = [];
+        const arrayStarts = [];
+
+        //Consultar y recuperar de la DB
+        const product = await Product.findOne(
+            {
+                where: {
+                    id: parseInt(productId)
+                }
+            }
+        )
+
+        if (!product) {
+            throw new Error('Product not found');
+        }
+
+        const reviews = await Review.find(
+            {
+                where: {
+                    product: product
+                },
+                relations: [
+                    'reviewer'
+                ],
+                select: {
+                    reviewer: { name: true },
+                    description: true,
+                    starts: true
+                }
+
+            }
+        )
+
+        for (let i = 0; i < reviews.length; i++) {
+            arrayReviews.push(reviews[i])
+            arrayStarts.push(reviews[i].starts)
+        }
+        let startsAverage = arrayStarts.reduce((a, b) => a + b) / arrayStarts.length;
+
+        // RESPONDER
+        res.status(200).json(
+            {
+                success: true,
+                message: "Service retrieved successfully",
+                data: arrayReviews, arrayStarts, startsAverage
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Service cant be retrieved",
+            error: error
+        })
+    }
+}
+
 //GET FAVORITES OF A PRODUCT
 export const productFavorites = async (req: Request, res: Response) => {
 
@@ -587,6 +649,59 @@ export const productFavorites = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "Service cant be retrieved",
+            error: error
+        })
+    }
+}
+
+//GET PRODUCT ONE CATEGORY
+export const categoryProducts = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        const userId = req.tokenData.userId
+        const categoryId = req.params.id
+        // PAGINACION Y FILTROS
+        const limit = Number(req.query.limit) || 10;
+        const page = Number(req.query.page) || 1;
+        const skip = (page - 1) * limit;
+
+        interface queryFilters {
+            name?: FindOperator<string>
+        }
+        const queryFilters: queryFilters = {}
+        if (req.query.name) {
+            queryFilters.name = Like("%" + req.query.name.toString() + "%");
+        }
+        //Consultar y recuperar de la DB
+        const products = await Product.find(
+            {
+                where: {
+                    ...queryFilters,
+                    category: { id: parseInt(categoryId) }
+                },
+                take: limit,
+                skip: skip
+            }
+        )
+        console.log(products)
+
+        if (!products) {
+            throw new Error('Product not found');
+        }
+
+        // RESPONDER
+        res.status(200).json(
+            {
+                success: true,
+                message: "Products retrieved successfully",
+                data: products
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Products cant be retrieved",
             error: error
         })
     }
