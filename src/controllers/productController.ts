@@ -533,3 +533,61 @@ export const reviewProduct = async (req: Request, res: Response) => {
         })
     }
 }
+
+//GET FAVORITES OF A PRODUCT
+export const productFavorites = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        const userId = req.tokenData.userId
+        const productId = req.params.id
+        let arrayFavoriteProduct = [];
+
+        //Consultar y recuperar de la DB
+        const product = await Product.findOne(
+            {
+                where: {
+                    id: parseInt(productId)
+                }
+            }
+        )
+
+        if (!product) {
+            throw new Error('Product not found');
+        }
+
+        const favoriteProduct = await FavoriteProduct.find(
+            {
+                where: {
+                    product: product
+                },
+                relations: [
+                    'user'
+                ],
+                select: {
+                    user: { name: true }
+                }
+
+            }
+        )
+
+        for (let i = 0; i < favoriteProduct.length; i++) {
+            arrayFavoriteProduct.push(favoriteProduct[i].user.name)
+        }
+
+        // RESPONDER
+        res.status(200).json(
+            {
+                success: true,
+                message: "Service retrieved successfully",
+                data: arrayFavoriteProduct
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Service cant be retrieved",
+            error: error
+        })
+    }
+}

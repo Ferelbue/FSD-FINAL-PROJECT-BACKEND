@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import { addToFavorite, createProduct, deleteProduct, getMyProducts, getProductById, getProducts, reviewProduct, updateProduct } from "../controllers/productController";
+import { addToFavorite, createProduct, deleteProduct, getMyProducts, getProductById, getProducts, productFavorites, reviewProduct, updateProduct } from "../controllers/productController";
 import { auth } from "../middlewares/auth";
 
 const router = Router()
@@ -13,6 +13,7 @@ router.put('/:id', auth, updateProduct)
 router.delete('/:id', auth, deleteProduct)
 router.put('/favorite/:id', auth, addToFavorite)
 router.post('/review/:id', auth, reviewProduct)
+router.get('/favorites/:id', auth, productFavorites)
 // router.post('/login', login)
 
 export default router
