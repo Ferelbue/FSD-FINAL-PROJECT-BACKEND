@@ -258,6 +258,23 @@ export const createMessage = async (req: Request, res: Response) => {
                 userOwner_author: true,
             }).save()
 
+            const deal = await Deal.findOne(
+                {
+                    where: {
+                        product: { id: parseInt(productId) },
+                        userOwner: { id: userId },
+                        userUser: { id: parseInt(userUserId) }
+                    }
+                }
+            )
+            if (!deal) {
+                await Deal.create({
+                    product: { id: parseInt(productId) },
+                    userOwner: { id: userId },
+                    userUser: { id: parseInt(userUserId) }
+                }).save()
+            }
+
             return res.status(201).json(
                 {
                     success: true,
@@ -276,6 +293,23 @@ export const createMessage = async (req: Request, res: Response) => {
                 userOwner_notification: true,
                 userUser_author: true,
             }).save()
+
+            const deal = await Deal.findOne(
+                {
+                    where: {
+                        product: { id: parseInt(productId) },
+                        userOwner: { id: product.owner.id },
+                        userUser: { id: userId }
+                    }
+                }
+            )
+            if (!deal) {
+                await Deal.create({
+                    product: { id: parseInt(productId) },
+                    userOwner: { id: product.owner.id },
+                    userUser: { id: userId }
+                }).save()
+            }
 
             return res.status(201).json(
                 {
@@ -348,7 +382,7 @@ export const deleteMessage = async (req: Request, res: Response) => {
                 success: true,
                 message: "Message deleted successfully"
             })
-        }else{
+        } else {
             return res.status(401).json({
                 success: false,
                 message: "You are not authorized to delete this message"

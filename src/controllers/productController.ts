@@ -463,7 +463,7 @@ export const addToFavorite = async (req: Request, res: Response) => {
     }
 }
 
-//CREATE PRODUCT
+//CREATE REVIEW
 export const reviewProduct = async (req: Request, res: Response) => {
 
     try {
