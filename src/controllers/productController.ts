@@ -2,6 +2,7 @@ import { Request, Response } from "express"
 import { Product } from "../models/Product"
 import { FindOperator, Like } from "typeorm";
 import { da, tr } from "@faker-js/faker";
+import { FavoriteProduct } from "../models/FavoriteProduct";
 
 //GET ALL PRODUCTS
 export const getProducts = async (req: Request, res: Response) => {
@@ -218,10 +219,12 @@ export const createProduct = async (req: Request, res: Response) => {
     }
 }
 
-//MODIFY SERVICE
+//MODIFY PRODUCT
 export const updateProduct = async (req: Request, res: Response) => {
     try {
         const productId = req.params.id;
+        const ownerId = req.tokenData.userId;
+
         let productName = req.body.name;
         let description = req.body.description;
         let image = req.body.image;
@@ -230,11 +233,7 @@ export const updateProduct = async (req: Request, res: Response) => {
         let dayPrice = req.body.dayPrice;
         let depositPrice = req.body.depositPrice;
         let categoryId = req.body.category;
-        const ownerId = req.tokenData.userId;
 
-
-        console.log(productId)
-        console.log(ownerId, "ownerId")
         //Validar datos
         const product = await Product.find(
             {
@@ -326,7 +325,6 @@ export const updateProduct = async (req: Request, res: Response) => {
             }
         )
 
-
         // Responder
         res.status(200).json(
             {
@@ -345,36 +343,112 @@ export const updateProduct = async (req: Request, res: Response) => {
     }
 }
 
-// //DELETE SERVICE
-// export const deleteProduct = async (req: Request, res: Response) => {
+//DELETE PRODUCT
+export const deleteProduct = async (req: Request, res: Response) => {
 
-//     try {
-//         const userId = req.params.id
+    try {
+        const productId = req.params.id
 
-//         const user = await Service.findOneBy({
-//             id: parseInt(userId)
-//         })
-//         if (!user) {
-//             return res.status(404).json({
-//                 success: false,
-//                 message: "Service not found"
-//             })
-//         }
+        const product = await Product.findOneBy({
+            id: parseInt(productId)
+        })
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Service not found"
+            })
+        }
 
-//         const userDeleted = await Service.remove(user)
+        const productDeleted = await Product.remove(product)
 
-//         return res.status(200).json({
-//             success: true,
-//             message: "Service deleted successfully",
-//             data: userDeleted
-//         })
-//     } catch (error) {
-//         return res.status(500).json({
-//             success: false,
-//             message: "Service can't be deleted",
-//             error: error
-//         })
-//     }
-// }
+        return res.status(200).json({
+            success: true,
+            message: "Service deleted successfully",
+            data: productDeleted
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Service can't be deleted",
+            error: error
+        })
+    }
+}
 
-// 
+//GET MY PRODUCTS
+export const addToFavorite = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        const userId = req.tokenData.userId
+        const productId = req.params.id
+
+        //Consultar y recuperar de la DB
+        const product = await Product.findOne(
+            {
+                where: {
+                    id: parseInt(productId)
+                }
+            }
+        )
+        
+        if (!product) {
+            throw new Error('Product not found');
+        }
+        
+        const favoriteProduct = await FavoriteProduct.find(
+            {
+                where: {
+                    product: product
+                },
+                relations: [
+                    'user'
+                ],
+                select: {
+                    user: { id: true }
+                }
+
+            }
+        )
+        
+        for(let i = 0; i < favoriteProduct.length; i++) {
+
+            if (favoriteProduct[i].user.id === userId) {
+                const favDeleted = await FavoriteProduct.remove(favoriteProduct[i])
+                return res.status(200).json({
+                    success: true,
+                    message: "Product removed from favorites",
+                    data: favDeleted
+                })
+                
+            }
+            if (i === favoriteProduct.length - 1) {
+                console.log(product.id)
+                const newFavoriteProduct = await FavoriteProduct.create({
+                    user: { id: userId },
+                    product: {id: product.id}
+                }).save()
+                return res.status(200).json({
+                    success: true,
+                    message: "Product added to favorites",
+                    data: newFavoriteProduct
+                })
+            }
+        }
+
+        // RESPONDER
+        res.status(200).json(
+            {
+                success: true,
+                message: "Service retrieved successfully",
+                data: product
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Service cant be retrieved",
+            error: error
+        })
+    }
+}
