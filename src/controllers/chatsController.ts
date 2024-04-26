@@ -60,7 +60,7 @@ export const getUserChats = async (req: Request, res: Response) => {
         for (let i = 0; i < messages2.length; i++) {
             arrayChats.push(messages2[i])
         }
-        
+
 
         let groupedChats = arrayChats.reduce((grouped: { [key: number]: typeof arrayChats }, message) => {
             if (message.product && message.userUser.id === userId) {
@@ -93,7 +93,7 @@ export const getUserChats = async (req: Request, res: Response) => {
             {
                 success: true,
                 message: "Products retrieved successfully",
-                data: groupedChats,groupedChats2
+                data: groupedChats, groupedChats2
             }
         )
 
@@ -142,7 +142,7 @@ export const getMessages = async (req: Request, res: Response) => {
             })
         }
 
-        if(product[0].owner.id === userId){
+        if (product[0].owner.id === userId) {
             const messages = await Message.find(
                 {
                     where: {
@@ -166,7 +166,7 @@ export const getMessages = async (req: Request, res: Response) => {
             )
         }
 
-        if(product[0].owner.id !== userId){
+        if (product[0].owner.id !== userId) {
             const messages = await Message.find(
                 {
                     where: {
@@ -204,6 +204,100 @@ export const getMessages = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "Product cant be retrieved",
+            error: error
+        })
+    }
+}
+
+//CREATE PRODUCT
+export const createMessage = async (req: Request, res: Response) => {
+
+    try {
+        const message = req.body.message;
+        const userId = req.tokenData.userId;
+        const productId = req.params.productId;
+        const userUserId = req.params.userUserId;
+
+        //Validar datos
+        if (!message) {
+            return res.status(400).json({
+                success: false,
+                message: "Message is required"
+            })
+        }
+
+        const product = await Product.findOne(
+            {
+                where: {
+                    id: parseInt(productId)
+                },
+                relations: {
+                    owner: true
+                },
+                select: {
+                    id: true,
+                    owner: { id: true }
+                }
+            }
+        )
+
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Product not found"
+            })
+        }
+
+        if (product.owner.id === userId) {
+            const newMessage = await Message.create({
+                message: message,
+                userOwner: { id: userId },
+                userUser: { id: parseInt(userUserId) },
+                product: { id: parseInt(productId) },
+                userUser_notification: true,
+                userOwner_author: true,
+            }).save()
+
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: "Message registered successfully",
+                    data: newMessage
+                }
+            )
+        }
+
+        if (product.owner.id !== userId) {
+            const newMessage = await Message.create({
+                message: message,
+                userOwner: { id: product.owner.id },
+                userUser: { id: userId },
+                product: { id: parseInt(productId) },
+                userOwner_notification: true,
+                userUser_author: true,
+            }).save()
+
+            return res.status(201).json(
+                {
+                    success: true,
+                    message: "Message registered successfully",
+                    data: newMessage
+                }
+            )
+        }
+
+        res.status(201).json(
+            {
+                success: false,
+                message: "Message registered successfully",
+                data: product
+            }
+        )
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Message cant be created",
             error: error
         })
     }
