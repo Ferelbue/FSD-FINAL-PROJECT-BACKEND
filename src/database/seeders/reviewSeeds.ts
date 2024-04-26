@@ -8,12 +8,13 @@ export const reviewSeedDatabase = async () => {
     try {
         await AppDataSource.initialize();
 
-        for (let i = 7; i <= 30; i++) {
+        for (let i = 1; i <= 30; i++) {
             const review = Review.create({
                 name: faker.person.firstName(),
                 description: faker.lorem.sentence(5),
                 starts: Math.floor(Math.random() * 5) + 1 ,
                 product: { id: Math.floor(Math.random() * 30) + 1 },
+                reviewer: { id: Math.floor(Math.random() * 10) + 1 }
             })
             await review.save();
         }

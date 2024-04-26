@@ -4,6 +4,7 @@ import { Product } from "./Product"
 import { Deal } from "./Deal"
 import { Message } from "./Message"
 import { FavoriteProduct } from "./FavoriteProduct"
+import { Review } from "./Review"
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -41,22 +42,25 @@ export class User extends BaseEntity {
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
     updated_at!: Date;
-    
+
     @OneToMany(() => Product, product => product.owner)
     products!: Product[];
-    
+
     @OneToMany(() => Deal, deal => deal.userOwner)
     dealsAsOwner!: Deal[];
-    
+
     @OneToMany(() => Deal, deal => deal.userUser)
     dealsAsUser!: Deal[];
-    
+
     @OneToMany(() => Message, message => message.userOwner)
     messagesAsOwner!: Message[];
-    
+
     @OneToMany(() => Message, message => message.userUser)
     messagesAsUser!: Message[];
-    
+
     @OneToMany(() => FavoriteProduct, favoriteProduct => favoriteProduct.user)
     favoriteProducts!: FavoriteProduct[];
+
+    @OneToMany(() => Review, review => review.reviewer)
+    reviews: Review[] | undefined;
 }

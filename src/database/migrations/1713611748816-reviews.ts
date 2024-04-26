@@ -34,6 +34,11 @@ export class Reviews1713611748816 implements MigrationInterface {
                     name: "product_id",
                     type: "int",
                     isNullable: false,
+                },
+                {
+                    name: "reviewer_id",
+                    type: "int",
+                    isNullable: false,
                 }
             ],
             foreignKeys: [
@@ -41,6 +46,12 @@ export class Reviews1713611748816 implements MigrationInterface {
                     columnNames: ["product_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "products",
+                    onDelete: "CASCADE"
+                },
+                {
+                    columnNames: ["reviewer_id"],
+                    referencedColumnNames: ["id"],
+                    referencedTableName: "users",
                     onDelete: "CASCADE"
                 }
             ]

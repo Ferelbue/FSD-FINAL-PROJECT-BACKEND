@@ -1,8 +1,10 @@
 import { Request, Response } from "express"
 import { Product } from "../models/Product"
 import { FindOperator, Like } from "typeorm";
-import { da, tr } from "@faker-js/faker";
+import { da, fa, tr } from "@faker-js/faker";
 import { FavoriteProduct } from "../models/FavoriteProduct";
+import { Review } from "../models/Review";
+import { Deal } from "../models/Deal";
 
 //GET ALL PRODUCTS
 export const getProducts = async (req: Request, res: Response) => {
@@ -391,11 +393,11 @@ export const addToFavorite = async (req: Request, res: Response) => {
                 }
             }
         )
-        
+
         if (!product) {
             throw new Error('Product not found');
         }
-        
+
         const favoriteProduct = await FavoriteProduct.find(
             {
                 where: {
@@ -410,32 +412,41 @@ export const addToFavorite = async (req: Request, res: Response) => {
 
             }
         )
-        
-        for(let i = 0; i < favoriteProduct.length; i++) {
+        console.log(favoriteProduct.length)
+        let arrayFavoriteProduct = [];
 
+        for (let i = 0; i < favoriteProduct.length; i++) {
             if (favoriteProduct[i].user.id === userId) {
+
+                for (let i = 0; i < favoriteProduct.length; i++) {
+                    arrayFavoriteProduct.push(favoriteProduct[i].user.id)
+                }
+
                 const favDeleted = await FavoriteProduct.remove(favoriteProduct[i])
                 return res.status(200).json({
                     success: true,
                     message: "Product removed from favorites",
-                    data: favDeleted
+                    data: favDeleted, arrayFavoriteProduct
                 })
-                
+
             }
             if (i === favoriteProduct.length - 1) {
-                console.log(product.id)
+                for (let i = 0; i < favoriteProduct.length; i++) {
+                    arrayFavoriteProduct.push(favoriteProduct[i].user.id)
+                }
                 const newFavoriteProduct = await FavoriteProduct.create({
                     user: { id: userId },
-                    product: {id: product.id}
+                    product: { id: product.id }
                 }).save()
+
+
                 return res.status(200).json({
                     success: true,
                     message: "Product added to favorites",
-                    data: newFavoriteProduct
+                    data: newFavoriteProduct, arrayFavoriteProduct
                 })
             }
         }
-
         // RESPONDER
         res.status(200).json(
             {
@@ -448,6 +459,76 @@ export const addToFavorite = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "Service cant be retrieved",
+            error: error
+        })
+    }
+}
+
+//CREATE PRODUCT
+export const reviewProduct = async (req: Request, res: Response) => {
+
+    try {
+        const productId = parseInt(req.params.id);
+        const reviewerId = req.tokenData.userId;
+        const reviewerName = req.tokenData.userName;
+
+        const productName = req.body.name;
+        const description = req.body.description;
+        const starts = req.body.starts;
+
+        //Validar datos
+        if (!productName || !description || !starts) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing data",
+                data: req.body
+            })
+        }
+
+        const deal = await Deal.findOne({
+            where: {
+                product: { id: productId },
+                userUser: { id: reviewerId }
+            }
+        })
+
+        if (!deal) {
+            return res.status(404).json({
+                success: false,
+                message: "Not deal found for this product and user",
+            })
+        }
+
+        if (deal?.userOwner_confirm === false || deal?.userUser_confirm === false) {
+            return res.status(403).json({
+                success: false,
+                message: "You need both users confirm the deal first",
+            })
+        }
+        const newReview = await Review.create({
+            name: reviewerName,
+            description: description,
+            starts: starts,
+            product: { id: productId },
+            reviewer: { id: reviewerId }
+        }).save()
+
+        if (newReview && deal) {
+            const dealDeleted = await Deal.delete(deal.id);
+        }
+
+        res.status(201).json(
+            {
+                success: false,
+                message: "Product registered successfully",
+                data: newReview
+            }
+        )
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Product cant be created",
             error: error
         })
     }
