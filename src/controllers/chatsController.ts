@@ -302,3 +302,64 @@ export const createMessage = async (req: Request, res: Response) => {
         })
     }
 }
+
+//DELETE PRODUCT
+export const deleteMessage = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const userId = req.tokenData.userId;
+        const userRole = req.tokenData.roleName;
+        console.log(id)
+        console.log(userId)
+        console.log(userRole)
+        const message = await Message.findOne(
+            {
+                where: {
+                    id: parseInt(id)
+                },
+                relations: {
+                    userOwner: true,
+                    userUser: true
+                },
+                select: {
+                    id: true,
+                    userOwner: { id: true },
+                    userUser: { id: true },
+                    userUser_author: true,
+                    userOwner_author: true
+                }
+            }
+        )
+        console.log(message)
+        if (!message) {
+            return res.status(404).json({
+                success: false,
+                message: "Message not found"
+            })
+        }
+
+
+        if ((message.userOwner_author === true && message.userOwner.id === userId) ||
+            (message.userUser_author === true && message.userUser.id === userId) ||
+            userRole === "admin") {
+
+            await Message.delete(parseInt(id))
+            return res.status(200).json({
+                success: true,
+                message: "Message deleted successfully"
+            })
+        }else{
+            return res.status(401).json({
+                success: false,
+                message: "You are not authorized to delete this message"
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Message cant be deleted",
+            error: error
+        })
+    }
+}
