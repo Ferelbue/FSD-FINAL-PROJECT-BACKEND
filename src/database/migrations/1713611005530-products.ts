@@ -43,6 +43,11 @@ export class Products1713611005530 implements MigrationInterface {
                     default: 0,
                 },
                 {
+                    name: "totalReviews",
+                    type: "int",
+                    default: 0,
+                },
+                {
                     name: "hourPrice",
                     type: "decimal",
                     precision: 10,

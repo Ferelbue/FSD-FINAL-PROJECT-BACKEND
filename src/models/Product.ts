@@ -29,6 +29,9 @@ export class Product extends BaseEntity {
     @Check("starts_check", "starts >= 0 AND starts <= 5")
     starts!: number;
 
+    @Column({ type: 'int' })
+    totalReviews!: number;
+
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     hourPrice!: number;
 

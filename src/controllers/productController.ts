@@ -8,7 +8,7 @@ import { Deal } from "../models/Deal";
 //GET ALL PRODUCTS
 export const getProducts = async (req: Request, res: Response) => {
     try {
-        const limit = Number(req.query.limit) || 10;
+        const limit = Number(req.query.limit) || 100;
         const page = Number(req.query.page) || 1;
         const skip = (page - 1) * limit;
 
@@ -24,6 +24,7 @@ export const getProducts = async (req: Request, res: Response) => {
         const products = await Product.find(
             {
                 where: queryFilters,
+                relations: ['category'],
                 select: {
                     id: true,
                     name: true,
@@ -33,6 +34,8 @@ export const getProducts = async (req: Request, res: Response) => {
                     hourPrice: true,
                     dayPrice: true,
                     starts: true,
+                    totalReviews: true,
+                    category: { id: true, name: true },
                 },
                 take: limit,
                 skip: skip
@@ -74,6 +77,7 @@ export const getProductById = async (req: Request, res: Response) => {
                 where: {
                     id: parseInt(productId)
                 },
+                relations: ['reviews'],
                 select: {
                     id: true,
                     name: true,
@@ -84,6 +88,7 @@ export const getProductById = async (req: Request, res: Response) => {
                     dayPrice: true,
                     depositPrice: true,
                     starts: true,
+                    reviews: true,
                 }
             }
         )
@@ -516,6 +521,41 @@ export const reviewProduct = async (req: Request, res: Response) => {
             const dealDeleted = await Deal.delete(deal.id);
         }
 
+        const startsArray = await Review.find({
+            where: {
+                product: { id: productId }
+            },
+            select: {
+                starts: true
+            }
+        })
+
+        let startsAverage = 0;
+        if (startsArray.length > 0) {
+            const arrayStarts = [];
+            for (let i = 0; i < startsArray.length; i++) {
+                arrayStarts.push(startsArray[i].starts)
+            }
+            startsAverage = arrayStarts.reduce((a, b) => a + b) / arrayStarts.length;
+        }
+    
+        // Update product starts
+        const product = await Product.findOne({
+            where: {
+                id: productId
+            }
+        })
+        const productUpdated = await Product.update(
+            {
+                id: productId
+            },
+            {
+                starts: startsAverage,
+                totalReviews: startsArray.length
+            }
+        )
+
+
         res.status(201).json(
             {
                 success: false,
@@ -658,7 +698,6 @@ export const categoryProducts = async (req: Request, res: Response) => {
 
     try {
         //RECUPERAR DATOS
-        const userId = req.tokenData.userId
         const categoryId = req.params.id
         // PAGINACION Y FILTROS
         const limit = Number(req.query.limit) || 10;
@@ -678,6 +717,23 @@ export const categoryProducts = async (req: Request, res: Response) => {
                 where: {
                     ...queryFilters,
                     category: { id: parseInt(categoryId) }
+                },
+                relations: [
+                    'category',
+                    'owner'
+                ],
+                select: {
+                    id: true,
+                    name: true,
+                    description: true,
+                    image: true,
+                    city: true,
+                    hourPrice: true,
+                    dayPrice: true,
+                    starts: true,
+                    totalReviews: true,
+                    category: { id: true, name: true },
+                    owner: { id: true, name: true }
                 },
                 take: limit,
                 skip: skip

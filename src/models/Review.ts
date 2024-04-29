@@ -18,6 +18,12 @@ export class Review extends BaseEntity {
     @Check("starts_check", "starts >= 0 AND starts <= 5")
     starts!: number;
 
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    created_at!: Date;
+
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+    updated_at!: Date;
+
     @ManyToOne(() => Product, product => product.reviews, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "product_id" })
     product!: Product;

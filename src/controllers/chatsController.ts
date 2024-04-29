@@ -149,8 +149,14 @@ export const getMessages = async (req: Request, res: Response) => {
                         product: { id: parseInt(productId) },
                         userUser: { id: parseInt(userUser) }
                     },
+                    relations: {
+                        userOwner: true,
+                        userUser: true
+                    },
                     select: {
                         message: true,
+                        userOwner: { id: true, name: true },
+                        userUser: { id: true, name: true },
                         userOwner_author: true,
                         userUser_author: true,
                         updated_at: true
@@ -160,7 +166,7 @@ export const getMessages = async (req: Request, res: Response) => {
             return res.status(200).json(
                 {
                     success: true,
-                    message: "asdMessages retrieved successfully",
+                    message: "Messages retrieved successfully",
                     data: messages
                 }
             )
@@ -173,9 +179,15 @@ export const getMessages = async (req: Request, res: Response) => {
                         product: { id: parseInt(productId) },
                         userUser: { id: userId }
                     },
+                    relations: {
+                        userOwner: true,
+                        userUser: true
+                    },
                     select: {
                         message: true,
                         userOwner_author: true,
+                        userOwner: { id: true, name: true },
+                        userUser: { id: true, name: true },
                         userUser_author: true,
                         updated_at: true
                     }

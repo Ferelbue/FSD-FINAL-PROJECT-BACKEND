@@ -88,34 +88,6 @@ export const approveDeal = async (req: Request, res: Response) => {
             }
         }
 
-        // if (product.owner.id !== userLogedId) {
-        //     const deal = await Deal.find({
-        //         where: {
-        //             product: { id: parseInt(productId) },
-        //             user: { id: parseInt(userId) }
-        //         },
-        //         relations: {
-        //             userOwner: true,
-        //             userUser: true
-        //         }
-        //     })
-        //     console.log(deal)
-        //     // Actualizar datos
-        //     const dealUpdated = await Deal.update(
-        //         {
-        //             id: deal[0].id
-        //         },
-        //         {
-        //             userUser_confirm: true
-        //         }
-        //     )
-        //     if (dealUpdated.affected === 1) {
-        //         return res.status(200).json({
-        //             success: true,
-        //             message: "Deal approved"
-        //         })
-        //     }
-        // }
     } catch (error) {
         res.status(500).json({
             success: false,
