@@ -24,7 +24,7 @@ export const getProducts = async (req: Request, res: Response) => {
         const products = await Product.find(
             {
                 where: queryFilters,
-                relations: ['category'],
+                relations: ['category', 'owner'],
                 select: {
                     id: true,
                     name: true,
@@ -36,6 +36,7 @@ export const getProducts = async (req: Request, res: Response) => {
                     starts: true,
                     totalReviews: true,
                     category: { id: true, name: true },
+                    owner: { id: true, name: true }
                 },
                 take: limit,
                 skip: skip
@@ -70,14 +71,17 @@ export const getProductById = async (req: Request, res: Response) => {
     try {
         //RECUPERAR DATOS
         const productId = req.params.id
-
+        console.log(productId)
         //Consultar y recuperar de la DB
         const product = await Product.findOne(
             {
                 where: {
                     id: parseInt(productId)
                 },
-                relations: ['reviews'],
+                relations: {
+                    owner: true,
+                    reviews: true
+                },
                 select: {
                     id: true,
                     name: true,
@@ -89,6 +93,7 @@ export const getProductById = async (req: Request, res: Response) => {
                     depositPrice: true,
                     starts: true,
                     reviews: true,
+                    owner: { id: true, name: true},
                 }
             }
         )
