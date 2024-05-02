@@ -4,6 +4,8 @@ import { FindOperator, Like } from "typeorm";
 import { FavoriteProduct } from "../models/FavoriteProduct";
 import { Review } from "../models/Review";
 import { Deal } from "../models/Deal";
+import fs from "fs";
+import { User } from "../models/User";
 
 //GET ALL PRODUCTS
 export const getProducts = async (req: Request, res: Response) => {
@@ -71,7 +73,6 @@ export const getProductById = async (req: Request, res: Response) => {
     try {
         //RECUPERAR DATOS
         const productId = req.params.id
-        console.log(productId)
         //Consultar y recuperar de la DB
         const product = await Product.findOne(
             {
@@ -93,7 +94,7 @@ export const getProductById = async (req: Request, res: Response) => {
                     depositPrice: true,
                     starts: true,
                     reviews: true,
-                    owner: { id: true, name: true},
+                    owner: { id: true, name: true },
                 }
             }
         )
@@ -212,7 +213,6 @@ export const createProduct = async (req: Request, res: Response) => {
             owner: { id: ownerId }
         }).save()
 
-        console.log(newProduct)
         res.status(201).json(
             {
                 success: false,
@@ -395,6 +395,68 @@ export const addToFavorite = async (req: Request, res: Response) => {
         const productId = req.params.id
 
         //Consultar y recuperar de la DB
+        const user = await User.findOne(
+            {
+                where:{id:userId}
+            }
+        )
+        const product = await Product.findOne(
+            {
+                where:{id:parseInt(productId)}
+            }       
+        );
+        
+        if (!user || !product) {
+            throw new Error('User or product not found');
+        }
+
+        const favoriteProduct = await FavoriteProduct.find({
+            where: {
+                product: product,
+                user: user
+            },
+            relations: ['user', 'product']
+        });
+
+        console.log(favoriteProduct)
+        if (favoriteProduct.length > 0) {
+            const favoriteProductDeleted = await FavoriteProduct.delete(favoriteProduct[0].id);
+            return res.status(200).json({
+                success: true,
+                message: "Product removed from favorites",
+                data: favoriteProductDeleted
+            })
+        }
+        if (favoriteProduct.length === 0) {
+            const newFavoriteProduct = await FavoriteProduct.create({
+                user: user,
+                product: product
+            }).save()
+
+            return res.status(201).json({
+                success: true,
+                message: "Product added to favorites",
+                data: newFavoriteProduct
+            })
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Product cant be retrieved",
+            error: error
+        })
+    }
+}
+
+export const productFavorite = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        const userId = req.tokenData.userId
+        const productId = req.params.id
+
+        //Consultar y recuperar de la DB
         const product = await Product.findOne(
             {
                 where: {
@@ -410,7 +472,8 @@ export const addToFavorite = async (req: Request, res: Response) => {
         const favoriteProduct = await FavoriteProduct.find(
             {
                 where: {
-                    product: product
+                    product: product,
+                    user: { id: userId }
                 },
                 relations: [
                     'user'
@@ -421,47 +484,13 @@ export const addToFavorite = async (req: Request, res: Response) => {
 
             }
         )
-        console.log(favoriteProduct.length)
-        let arrayFavoriteProduct = [];
 
-        for (let i = 0; i < favoriteProduct.length; i++) {
-            if (favoriteProduct[i].user.id === userId) {
-
-                for (let i = 0; i < favoriteProduct.length; i++) {
-                    arrayFavoriteProduct.push(favoriteProduct[i].user.id)
-                }
-
-                const favDeleted = await FavoriteProduct.remove(favoriteProduct[i])
-                return res.status(200).json({
-                    success: true,
-                    message: "Product removed from favorites",
-                    data: favDeleted, arrayFavoriteProduct
-                })
-
-            }
-            if (i === favoriteProduct.length - 1) {
-                for (let i = 0; i < favoriteProduct.length; i++) {
-                    arrayFavoriteProduct.push(favoriteProduct[i].user.id)
-                }
-                const newFavoriteProduct = await FavoriteProduct.create({
-                    user: { id: userId },
-                    product: { id: product.id }
-                }).save()
-
-
-                return res.status(200).json({
-                    success: true,
-                    message: "Product added to favorites",
-                    data: newFavoriteProduct, arrayFavoriteProduct
-                })
-            }
-        }
         // RESPONDER
         res.status(200).json(
             {
                 success: true,
                 message: "Service retrieved successfully",
-                data: product
+                data: favoriteProduct
             }
         )
     } catch (error) {
@@ -473,6 +502,7 @@ export const addToFavorite = async (req: Request, res: Response) => {
     }
 }
 
+
 //CREATE REVIEW
 export const reviewProduct = async (req: Request, res: Response) => {
 
@@ -481,12 +511,11 @@ export const reviewProduct = async (req: Request, res: Response) => {
         const reviewerId = req.tokenData.userId;
         const reviewerName = req.tokenData.userName;
 
-        const productName = req.body.name;
         const description = req.body.description;
         const starts = req.body.starts;
 
         //Validar datos
-        if (!productName || !description || !starts) {
+        if (!description || !starts) {
             return res.status(400).json({
                 success: false,
                 message: "Missing data",
@@ -543,7 +572,7 @@ export const reviewProduct = async (req: Request, res: Response) => {
             }
             startsAverage = arrayStarts.reduce((a, b) => a + b) / arrayStarts.length;
         }
-    
+
         // Update product starts
         const product = await Product.findOne({
             where: {
@@ -564,7 +593,7 @@ export const reviewProduct = async (req: Request, res: Response) => {
         res.status(201).json(
             {
                 success: false,
-                message: "Product registered successfully",
+                message: "Review registered successfully",
                 data: newReview
             }
         )
@@ -572,7 +601,7 @@ export const reviewProduct = async (req: Request, res: Response) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Product cant be created",
+            message: "Review cant be created",
             error: error
         })
     }
@@ -744,7 +773,6 @@ export const categoryProducts = async (req: Request, res: Response) => {
                 skip: skip
             }
         )
-        console.log(products)
 
         if (!products) {
             throw new Error('Product not found');
@@ -762,6 +790,89 @@ export const categoryProducts = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "Products cant be retrieved",
+            error: error
+        })
+    }
+}
+
+export const getMyFavorites = async (req: Request, res: Response) => {
+
+    try {
+        //RECUPERAR DATOS
+        console.log(1)
+        const userId = req.tokenData.userId
+
+
+        //Consultar y recuperar de la DB
+        const user = await User.findOne(
+            {
+                where:{id:userId}
+            }
+        )
+        
+        if (!user) {
+            throw new Error('User or product not found');
+        }
+
+        const favoriteProduct = await FavoriteProduct.find({
+            where: {
+                user: user
+            },
+            relations: ['user', 'product']
+        });
+
+        console.log(favoriteProduct)
+        if (favoriteProduct.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Any product found"
+            })
+        }
+        res.status(200).json(
+            {
+                success: true,
+                message: "Products retrieved successfully",
+                data: favoriteProduct
+            }
+        )
+
+
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Productd cant be retrieved",
+            error: error
+        })
+    }
+}
+
+export const uploadImage = async (req: Request, res: Response) => {
+    try {
+        const image = req.file;
+        if (!image) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing image",
+            })
+        }
+
+        function saveImage(image: any) {
+            const newPath = `uploads/${image.originalname}`;
+            fs.renameSync(image.path, newPath);
+            return newPath;
+        }
+        saveImage(image);
+
+        res.status(200).json({
+            success: true,
+            message: "Image uploaded successfully",
+            data: image
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Image cant be uploaded",
             error: error
         })
     }

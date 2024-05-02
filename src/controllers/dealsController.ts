@@ -33,9 +33,6 @@ export const approveDeal = async (req: Request, res: Response) => {
                 message: "Product not found"
             })
         }
-        console.log(product.owner.id)
-        console.log(userLogedId)
-        console.log(userId)
         if (product.owner.id === userLogedId) {
 
             const message = await Message.find({
@@ -57,7 +54,6 @@ export const approveDeal = async (req: Request, res: Response) => {
                 }
 
             })
-            console.log(message)
             const deal = await Deal.find({
                 where: {
                     product: { id: parseInt(productId) },
@@ -229,8 +225,6 @@ export const statusDeal = async (req: Request, res: Response) => {
                 userUser_confirm: true
             }
         })
-
-        console.log(product)
         if (product.length === 0) {
 
             const product2 = await Deal.find({

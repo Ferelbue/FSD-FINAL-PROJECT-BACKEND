@@ -30,6 +30,7 @@ export const getUserChats = async (req: Request, res: Response) => {
                 "message.userUser_notification",
                 "message.updated_at"
             ])
+            .orderBy("message.updated_at", "DESC")
             .getMany();
 
 
@@ -434,7 +435,7 @@ export const eraseNotification = async (req: Request, res: Response) => {
                 }
             }
         )
-        console.log(product)
+
 
         if (!product) {
             return res.status(404).json({
@@ -443,9 +444,7 @@ export const eraseNotification = async (req: Request, res: Response) => {
             })
         }
 
-        console.log(product.owner.id, userId)
         if (product.owner.id === userId) {
-            console.log("entroasdasd")
             const messages = await Message.find(
                 {
                     where: {
@@ -463,7 +462,6 @@ export const eraseNotification = async (req: Request, res: Response) => {
                     }
                 }
             )
-            console.log(messages)
             for (let i = 0; i < messages.length; i++) {
                 await Message.update(messages[i].id, { userOwner_notification: false })
             }
@@ -475,7 +473,6 @@ export const eraseNotification = async (req: Request, res: Response) => {
                 }
             )
         }else{
-            console.log("entro")
             const messages = await Message.find(
                 {
                     where: {
@@ -494,7 +491,6 @@ export const eraseNotification = async (req: Request, res: Response) => {
                 }
             )
             for (let i = 0; i < messages.length; i++) {
-                console.log(messages[i].id)
                 await Message.update(messages[i].id, { userUser_notification: false })
             }
 
