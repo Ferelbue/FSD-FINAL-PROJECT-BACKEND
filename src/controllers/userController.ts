@@ -21,6 +21,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
                 relations: [
                     'role',
                     'products',
+                    'reviews',
                 ],
                 select: {
                     id: true,
@@ -28,9 +29,14 @@ export const getUserProfile = async (req: Request, res: Response) => {
                     lastName: true,
                     image: true,
                     email: true,
+                    city: true,
                     products: {
-                        id: true,
-                        name: true
+                        reviews: {
+                            name: true,
+                            description: true,
+                            starts: true,
+                            updated_at: true
+                        }
                     },
                     role: {
                         name: true,

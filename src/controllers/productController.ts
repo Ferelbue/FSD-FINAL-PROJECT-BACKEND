@@ -138,6 +138,9 @@ export const getMyProducts = async (req: Request, res: Response) => {
                 where: {
                     owner: { id: userId }
                 },
+                relations: {
+                    owner: true
+                },
                 select: {
                     id: true,
                     name: true,
@@ -148,6 +151,8 @@ export const getMyProducts = async (req: Request, res: Response) => {
                     dayPrice: true,
                     depositPrice: true,
                     starts: true,
+                    totalReviews: true,
+                    owner: { id: true, name: true }
                 }
             }
         )
