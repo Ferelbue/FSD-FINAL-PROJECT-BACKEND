@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import { addToFavorite, categoryProducts, createProduct, deleteProduct, getMyFavorites, getMyProducts, getProductById, getProducts, productFavorite, productFavorites, productReviews, reviewProduct, updateProduct, uploadImage } from "../controllers/productController";
+import { addToFavorite, categoryProducts, createProduct, deleteProduct, getMyFavorites, getMyProducts, getProductById, getProducts, getProductsNumber, productFavorite, productFavorites, productReviews, reviewProduct, updateProduct, uploadImage } from "../controllers/productController";
 import { auth } from "../middlewares/auth";
 import multer from "multer";
 
@@ -8,6 +8,7 @@ const upload = multer({ dest: 'uploads/' });
 const router = Router()
 
 router.get('/', getProducts)
+router.get('/number', getProductsNumber)
 router.get('/own', auth, getMyProducts)
 router.get('/favorites/user', auth, getMyFavorites)
 router.get('/:id', getProductById)
