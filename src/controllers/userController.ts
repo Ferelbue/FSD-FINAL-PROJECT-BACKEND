@@ -676,3 +676,46 @@ export const updateUserProfileById = async (req: Request, res: Response) => {
         })
     }
 }
+
+//GET USER PROFILE
+export const getNumberUsers = async (req: Request, res: Response) => {
+    try {
+        //CONSULTA. Busqueda con los parametros de la query
+        const user = await User.find(
+            {
+                select: {
+                    id: true,
+                    name: true,
+                    lastName: true,
+                    email: true,
+                    image: true,
+                    city: true,
+                    role: {
+                        name: true,
+                    }
+                }
+            }
+        )
+        // VALIDACION
+        if (user.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Users not found",
+            })
+        }
+        // RESPUESTA
+        res.status(200).json(
+            {
+                success: true,
+                message: "Users retrieved successfully",
+                data: user
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Users cant be retrieved",
+            error: error
+        })
+    }
+}

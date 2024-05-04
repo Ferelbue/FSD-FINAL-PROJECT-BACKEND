@@ -66,7 +66,41 @@ export const getProducts = async (req: Request, res: Response) => {
         })
     }
 }
+//GET ALL PRODUCTS WITHOUT PAGINATION AND FILTERS
+export const getProductsNumber = async (req: Request, res: Response) => {
+    try {
 
+        //Consultar en base de datos
+        const products = await Product.find(
+            {
+                select: {
+                    id: true,
+
+                }
+            }
+        )
+        if (products.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Any product found"
+            })
+        }
+        res.status(200).json(
+            {
+                success: true,
+                message: "Products retrieved successfully",
+                data: products
+            }
+        )
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Products cant be retrieved",
+            error: error
+        })
+    }
+}
 //GET ONE PRODUCT
 export const getProductById = async (req: Request, res: Response) => {
 
