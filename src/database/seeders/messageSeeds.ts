@@ -19,7 +19,7 @@ export const messageSeedDatabase = async () => {
         }
 
         console.log("---------------------------------------")
-        console.log("++++++++ MESSAGES CREADOS (50) ++++++++")
+        console.log("++++++++ MESSAGES CREADOS (30) ++++++++")
         console.log("---------------------------------------")
 
     } catch (error) {

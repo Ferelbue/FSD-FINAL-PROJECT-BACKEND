@@ -6,7 +6,7 @@ export const favoriteProductSeedDatabase = async () => {
     try {
         await AppDataSource.initialize();
 
-        for (let i = 1; i <= 70; i++) {
+        for (let i = 1; i <= 30; i++) {
             const product = FavoriteProduct.create({
                 user: { id: Math.floor(Math.random() * 10) + 1 },
                 product: {id: Math.floor(Math.random() * 30) + 1},
