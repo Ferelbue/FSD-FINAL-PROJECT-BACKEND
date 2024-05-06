@@ -8,7 +8,7 @@ export const messageSeedDatabase = async () => {
     try {
         await AppDataSource.initialize();
 
-        for (let i = 1; i <= 50; i++) {
+        for (let i = 1; i <= 30; i++) {
             const message = Message.create({
                 message: faker.lorem.sentence(7),
                 userOwner: { id: Math.floor(Math.random() * 10) + 1 },

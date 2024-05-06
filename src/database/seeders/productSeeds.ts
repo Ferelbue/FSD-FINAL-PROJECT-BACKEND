@@ -9,7 +9,7 @@ export const productSeedDatabase = async () => {
         const product = Product.create({
             name: "taladro",
             description: "Taladro a bateria, gran potencia. Marca Bosch",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -23,7 +23,7 @@ export const productSeedDatabase = async () => {
         const product2 = Product.create({
             name: "radial",
             description: "Radial a bateria, gran potencia. Marca Bosch",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -37,7 +37,7 @@ export const productSeedDatabase = async () => {
         const product3 = Product.create({
             name: "hacha",
             description: "Mando de fibra de carbono, muy ligero y resistente",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 1,
@@ -51,7 +51,7 @@ export const productSeedDatabase = async () => {
         const product4 = Product.create({
             name: "motosierra",
             description: "Motosierra eléctrica, lubricación automática, incluida cadena, velocidad de corte 15 ms, 7800 rpm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -65,7 +65,7 @@ export const productSeedDatabase = async () => {
         const product5 = Product.create({
             name: "desbrozadora",
             description: "Desbrozadora de Gasolina Potencia(cv):1.4,",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -79,7 +79,7 @@ export const productSeedDatabase = async () => {
         const product6 = Product.create({
             name: "cortadora de azulejos",
             description: "Punta de diamante, 800W, 2950 rpm, 180 mm, 25 mm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -93,7 +93,7 @@ export const productSeedDatabase = async () => {
         const product7 = Product.create({
             name: "sierra circular",
             description: "Sierra circular con motor de 1500W y velocidad de 4500 rpm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 20,
@@ -107,7 +107,7 @@ export const productSeedDatabase = async () => {
         const product8 = Product.create({
             name: "martillo perforador",
             description: "Martillo perforador con energía de impacto de 2.7 J",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -121,7 +121,7 @@ export const productSeedDatabase = async () => {
         const product9 = Product.create({
             name: "taladro",
             description: "Taladro a bateria, gran potencia. Marca Bosch",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -135,7 +135,7 @@ export const productSeedDatabase = async () => {
         const product10 = Product.create({
             name: "radial",
             description: "Radial a bateria, gran potencia. Marca Bosch",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -149,7 +149,7 @@ export const productSeedDatabase = async () => {
         const product11 = Product.create({
             name: "amoladora",
             description: "Amoladora con disco de 115mm y potencia de 850W",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 12,
@@ -163,7 +163,7 @@ export const productSeedDatabase = async () => {
         const product12 = Product.create({
             name: "lijadora orbital",
             description: "Lijadora orbital con potencia de 300W y velocidad de 12000 rpm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -177,7 +177,7 @@ export const productSeedDatabase = async () => {
         const product13 = Product.create({
             name: "taladro percutor",
             description: "Taladro percutor con potencia de 850W y velocidad de 3000 rpm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -191,7 +191,7 @@ export const productSeedDatabase = async () => {
         const product14 = Product.create({
             name: "cortasetos",
             description: "Cortasetos con longitud de corte de 600mm y potencia de 600W",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 12,
@@ -205,7 +205,7 @@ export const productSeedDatabase = async () => {
         const product15 = Product.create({
             name: "soplador de hojas",
             description: "Soplador de hojas con potencia de 3000W y velocidad de aire de 270 km/h",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -219,7 +219,7 @@ export const productSeedDatabase = async () => {
         const product16 = Product.create({
             name: "aspiradora industrial",
             description: "Aspiradora industrial con capacidad de 30L y potencia de 1500W",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 20,
@@ -233,7 +233,7 @@ export const productSeedDatabase = async () => {
         const product17 = Product.create({
             name: "motosierra",
             description: "Motosierra con longitud de corte de 40cm y potencia de 2000W",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 25,
@@ -247,7 +247,7 @@ export const productSeedDatabase = async () => {
         const product18 = Product.create({
             name: "hidrolimpiadora",
             description: "Hidrolimpiadora con presión de 110 bar y potencia de 1400W",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -261,7 +261,7 @@ export const productSeedDatabase = async () => {
         const product19 = Product.create({
             name: "compresor de aire",
             description: "Compresor de aire con capacidad de 50L y potencia de 1500W",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 20,
@@ -275,7 +275,7 @@ export const productSeedDatabase = async () => {
         const product20 = Product.create({
             name: "generador eléctrico",
             description: "Generador eléctrico con potencia de 2000W y capacidad de 15L",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 30,
@@ -289,7 +289,7 @@ export const productSeedDatabase = async () => {
         const product21 = Product.create({
             name: "soldadora",
             description: "Soldadora con potencia de 140A y peso de 4.7kg",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 25,
@@ -303,7 +303,7 @@ export const productSeedDatabase = async () => {
         const product22 = Product.create({
             name: "escalera telescópica",
             description: "Escalera telescópica con longitud máxima de 5m y capacidad de 150kg",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -317,7 +317,7 @@ export const productSeedDatabase = async () => {
         const product23 = Product.create({
             name: "desbrozadora",
             description: "Desbrozadora con potencia de 1000W y diámetro de corte de 42cm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -331,7 +331,7 @@ export const productSeedDatabase = async () => {
         const product24 = Product.create({
             name: "rotocultor",
             description: "Rotocultor con potencia de 1400W y ancho de trabajo de 40cm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 20,
@@ -345,7 +345,7 @@ export const productSeedDatabase = async () => {
         const product25 = Product.create({
             name: "pulidora",
             description: "Pulidora con potencia de 1200W y velocidad de 3000 rpm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -359,7 +359,7 @@ export const productSeedDatabase = async () => {
         const product26 = Product.create({
             name: "fresadora",
             description: "Fresadora con potencia de 1200W y velocidad de 10000 rpm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 20,
@@ -373,7 +373,7 @@ export const productSeedDatabase = async () => {
         const product27 = Product.create({
             name: "sierra circular",
             description: "Sierra circular con potencia de 1200W y diámetro de disco de 190mm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 15,
@@ -387,7 +387,7 @@ export const productSeedDatabase = async () => {
         const product28 = Product.create({
             name: "martillo perforador",
             description: "Martillo perforador con potencia de 800W y energía de impacto de 2.7J",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 20,
@@ -401,7 +401,7 @@ export const productSeedDatabase = async () => {
         const product29 = Product.create({
             name: "sierra de calar",
             description: "Sierra de calar con potencia de 650W y profundidad de corte de 90mm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 10,
@@ -415,7 +415,7 @@ export const productSeedDatabase = async () => {
         const product30 = Product.create({
             name: "sierra de mesa",
             description: "Sierra de mesa con potencia de 1800W y diámetro de disco de 250mm",
-            image: faker.image.urlLoremFlickr({ category: 'business' }),
+            image: "defaultHta.png",
             city: "Valencia",
             starts:0,
             hourPrice: 25,

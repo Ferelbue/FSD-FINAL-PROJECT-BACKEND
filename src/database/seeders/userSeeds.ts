@@ -10,7 +10,6 @@ export const userSeedDatabase = async () => {
             name: "user",
             lastName: "user",
             email: "user@user.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG",
             role: { id: 1 }
@@ -21,7 +20,6 @@ export const userSeedDatabase = async () => {
             name: "admin",
             lastName: "admin",
             email: "admin@admin.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG",
             role: { id: 2 }
@@ -32,7 +30,6 @@ export const userSeedDatabase = async () => {
             name: "super",
             lastName: "super",
             email: "super@super.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG",
             role: { id: 3 }
@@ -43,7 +40,6 @@ export const userSeedDatabase = async () => {
             name: "Fernando",
             lastName: "Elegido",
             email: "fernando@fernando.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG",
             role: { id: 3 }
@@ -54,7 +50,6 @@ export const userSeedDatabase = async () => {
             name: "Marta",
             lastName: "Santes",
             email: "marta@marta.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG"
         })
@@ -64,7 +59,6 @@ export const userSeedDatabase = async () => {
             name: "Lola",
             lastName: "Eletes",
             email: "lola@lola.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG"
         })
@@ -74,7 +68,6 @@ export const userSeedDatabase = async () => {
             name: "Ruben",
             lastName: "Gomez",
             email: "ruben@ruben.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG"
         })
@@ -84,7 +77,6 @@ export const userSeedDatabase = async () => {
             name: "David",
             lastName: "Garcia",
             email: "david@david.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG"
         })
@@ -94,7 +86,6 @@ export const userSeedDatabase = async () => {
             name: "Pepa",
             lastName: "Perez",
             email: "pepa@pepa.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG"
         })
@@ -104,7 +95,6 @@ export const userSeedDatabase = async () => {
             name: "Pepe",
             lastName: "Perez",
             email: "pepe@pepe.com",
-            image: faker.image.urlLoremFlickr({ category: 'people' }),
             city: "Valencia",
             passwordHash: "$2b$08$lV2.D7/ibyEeWGbaJibeb.FknmnrSlcfpsYfNqbgZJJ0pKolyvObG"
         })

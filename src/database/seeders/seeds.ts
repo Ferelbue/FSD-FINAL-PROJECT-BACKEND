@@ -16,7 +16,7 @@ const seeder = async () => {
         await favoriteProductSeedDatabase();
         await reviewSeedDatabase();
         await messageSeedDatabase();
-        await dealSeedDatabase();
+        // await dealSeedDatabase();
 
     } catch (error) {
         console.error('Error en la ejecución del seeder:', error);

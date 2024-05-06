@@ -36,7 +36,7 @@ export class Users1713610285564 implements MigrationInterface {
                     name: "image",
                     type: "varchar",
                     length: "255",
-                    isNullable: false,
+                    default: "'userProfile.png'",
                 },
                 {
                     name: "city",
