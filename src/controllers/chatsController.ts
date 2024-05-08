@@ -472,7 +472,7 @@ export const eraseNotification = async (req: Request, res: Response) => {
                     message: "Notifications deleted successfully",
                 }
             )
-        }else{
+        } else {
             const messages = await Message.find(
                 {
                     where: {
@@ -506,6 +506,46 @@ export const eraseNotification = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "Notifications cant be deleted",
+            error: error
+        })
+    }
+}
+
+export const BringAllMessages = async (req: Request, res: Response) => {
+    try {
+        const userRole = req.tokenData.roleName;
+
+        if (userRole !== "user") {
+
+            const messages = await Message.find(
+                {
+                    relations: {
+                        userOwner: true,
+                        userUser: true,
+                        product: true
+                    },
+                    select: {
+                        id: true,
+                        message: true,
+                        userOwner: { id: true, name: true },
+                        userUser: { id: true, name: true },
+                        product: { id: true, name: true }
+                    }
+                }
+            )
+            return res.status(200).json(
+                {
+                    success: true,
+                    message: "Messages retrieved successfully",
+                    data: messages
+                }
+            )
+        }
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Messages cant be retrieved",
             error: error
         })
     }

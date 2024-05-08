@@ -41,7 +41,7 @@ The project consists of a tool rental app. Where users can search and upload too
 
 - **Online chat:** Concrete details between users.💬
 - **Real notification system:** User receives notifications when he has a new comment.🔴 
-- **Like a Post:** Like a friend post is available. ❤️
+- **Add favorite products:** List of favorite products. ❤️
 - **No registered functions:** It is not necessary to be logged-in to view certain parts of the app.👀
 - **Endpoints test:** Thunder collection file.👌
 - **User Authentication:** Secure signup and login processes. 🔒
