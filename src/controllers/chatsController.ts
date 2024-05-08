@@ -529,7 +529,8 @@ export const BringAllMessages = async (req: Request, res: Response) => {
                         message: true,
                         userOwner: { id: true, name: true },
                         userUser: { id: true, name: true },
-                        product: { id: true, name: true }
+                        product: { id: true, name: true },
+                        created_at: true
                     }
                 }
             )
@@ -569,8 +570,7 @@ export const BringAllMessagesNumber = async (req: Request, res: Response) => {
                         message: true,
                         userOwner: { id: true, name: true },
                         userUser: { id: true, name: true },
-                        product: { id: true, name: true },
-                        created_at: true
+                        product: { id: true, name: true }
                     }
                 }
             )
