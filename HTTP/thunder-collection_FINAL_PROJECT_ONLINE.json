@@ -1,0 +1,601 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "FINAL_PROJECT_ONLINE",
+    "collectionId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+    "dateExported": "2024-05-08T15:44:09.296Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "49a0f90b-bb54-4433-928d-bcc4acf55ae8",
+            "name": "AUTH ",
+            "containerId": "",
+            "created": "2024-05-08T15:35:38.090Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "PRODUCTS",
+            "containerId": "",
+            "created": "2024-05-08T15:35:38.091Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "USERS ",
+            "containerId": "",
+            "created": "2024-05-08T15:35:38.092Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "MESSAGES",
+            "containerId": "",
+            "created": "2024-05-08T15:35:38.093Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "0bc606a9-c946-4a81-ad92-c3732b73e129",
+            "name": "DEALS",
+            "containerId": "",
+            "created": "2024-05-08T15:35:38.094Z",
+            "sortNum": 50000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "ecbcf766-f463-4c8a-80df-88990475b637",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET ALL PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products?name=a&limit=2&page=1",
+            "method": "GET",
+            "sortNum": 5000,
+            "created": "2024-05-08T15:35:38.090Z",
+            "modified": "2024-05-08T15:36:04.221Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "a",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "baaed8f4-104c-4dc3-8723-a9b2d5646995",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET PRODUCT BY ID",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/2",
+            "method": "GET",
+            "sortNum": 7500,
+            "created": "2024-05-08T15:35:38.091Z",
+            "modified": "2024-05-08T15:40:32.820Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0NjMyODEsImV4cCI6MTcxNDQ3MDQ4MX0.C1AiC9D3cixrEz3Nnl5_pzkmVwxMWEEqVz5ipjGsD54"
+            }
+        },
+        {
+            "_id": "997c1812-ad46-42d9-a240-6f4910aaf099",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "49a0f90b-bb54-4433-928d-bcc4acf55ae8",
+            "name": "CREATE REGISTER",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/auth/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-08T15:35:38.092Z",
+            "modified": "2024-05-08T15:36:20.853Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Javsi\",\n  \"lastName\": \"Persez\",\n  \"email\": \"dana@dana.com\",\n  \"city\": \"Valencia\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "298eed52-9868-4737-b2c4-3f46264810ef",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "CREATE PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-05-08T15:35:38.093Z",
+            "modified": "2024-05-08T15:40:39.603Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"destornillador plano\",\n  \"description\": \"Mango de madera. Punta de 5mm.\",\n  \"image\": \"https://torno-fresa.com/wp-content/uploads/2022/10/16a0ffbcd4e0333f.jpg\",\n  \"city\": \"Valencia\",\n  \"hourPrice\": \"1\",\n  \"dayPrice\": \"5\",\n  \"depositPrice\": \"10\",\n  \"category\" : \"2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzEzOTk0MTIzLCJleHAiOjE3MTQwMDEzMjN9.9gSQKuRA5Wb8uloIW3Em2x5nDMrOwY9rG2ONrlTPvDo"
+            }
+        },
+        {
+            "_id": "cde66dec-3e04-4cd5-a96a-be9de2e59d51",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "GET USER PROFILE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users/profile",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-08T15:35:38.094Z",
+            "modified": "2024-05-08T15:42:13.097Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ3MjgzNzgsImV4cCI6MTcxNDczNTU3OH0.CElW-a9epd8EuGU7E3yeI6p0nz758VRjv7D0lHJQE4w"
+            }
+        },
+        {
+            "_id": "f4f466b3-e3eb-4f0d-990d-05afb3ab6333",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "GET ALL USER CHATS",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/chats",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-08T15:35:38.095Z",
+            "modified": "2024-05-08T15:42:58.440Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0NzA3ODUsImV4cCI6MTcxNDQ3Nzk4NX0.5HlS5b8cCS7CRLtogkJO-xLPE6mEEEtHtOHo-uJyW_4"
+            }
+        },
+        {
+            "_id": "12b810b3-c952-493d-8982-162e085a9a0b",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "0bc606a9-c946-4a81-ad92-c3732b73e129",
+            "name": "UPDATE DEAL",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/deals/18/7",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2024-05-08T15:35:38.096Z",
+            "modified": "2024-05-08T15:43:55.428Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ1MTc0NDYsImV4cCI6MTcxNDUyNDY0Nn0.4ZH9F1I0CeJ4oQRtbdwko2WuLMj54j5cebJ7JIkrvv8"
+            }
+        },
+        {
+            "_id": "908892e3-b9c8-4faf-866c-0652d3657519",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "UPLOAD IMAGE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/image",
+            "method": "POST",
+            "sortNum": 13750,
+            "created": "2024-05-08T15:35:38.097Z",
+            "modified": "2024-05-08T15:40:48.851Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\ferel\\Desktop\\FSD\\3-PROYECTOS\\PROYECTO_FINAL\\FRONTEND\\finalProject\\public\\chat.png"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ2NDczMjgsImV4cCI6MTcxNDY1NDUyOH0.tiYe87e7Q9QJGC5DS0NUl3tY15bPdbCqWdmnoPQk15A"
+            }
+        },
+        {
+            "_id": "6dbda80a-a238-4013-8e63-b931ebdbedf6",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "UPDATE USER PROFILE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users/profile",
+            "method": "PUT",
+            "sortNum": 15000,
+            "created": "2024-05-08T15:35:38.098Z",
+            "modified": "2024-05-08T15:42:18.690Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"city\": \"requena\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "056065ff-bd9e-479f-ad38-5c9d350e307e",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "GET ALL USERS",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users?email=&limit=2&page=2",
+            "method": "GET",
+            "sortNum": 17500,
+            "created": "2024-05-08T15:35:38.099Z",
+            "modified": "2024-05-08T15:42:23.363Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "email",
+                    "value": "",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoiYWRtaW4iLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNzE0ODM4NjYwLCJleHAiOjE3MTQ4NDU4NjB9.vUf7PLlJa8JkVEgiyIlme8Vqxt9VT7DO9mGFxmnSKrE"
+            }
+        },
+        {
+            "_id": "63df91a0-060e-42c3-8939-f2e4db0878cc",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET MY PRODUCTS",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/own",
+            "method": "GET",
+            "sortNum": 17500,
+            "created": "2024-05-08T15:35:38.101Z",
+            "modified": "2024-05-08T15:40:55.211Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzEzOTk0MTIzLCJleHAiOjE3MTQwMDEzMjN9.9gSQKuRA5Wb8uloIW3Em2x5nDMrOwY9rG2ONrlTPvDo"
+            }
+        },
+        {
+            "_id": "a9395894-0982-4df7-bdf7-991e24e6f59c",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "49a0f90b-bb54-4433-928d-bcc4acf55ae8",
+            "name": "USER LOGIN",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-08T15:35:38.102Z",
+            "modified": "2024-05-08T15:42:00.839Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"admin@admin.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c366e72a-6a57-476f-b463-500c978a41be",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "DELETE USER BY ID",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users/8",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2024-05-08T15:35:38.103Z",
+            "modified": "2024-05-08T15:42:27.728Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTM5MDY4NDksImV4cCI6MTcxMzkxNDA0OX0.OEjv0TqvSlmh-myEbCz8YYbQgXwjWOZKNkL-iXSBBzc"
+            }
+        },
+        {
+            "_id": "14b60e50-81a6-4334-8c5d-341cc2c77b32",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "GET MESSAGES BY PRODUCT AND USER",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/chats/3/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-08T15:35:38.104Z",
+            "modified": "2024-05-08T15:43:18.349Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0MTI5MzIsImV4cCI6MTcxNDQyMDEzMn0.XiTP1zJSMlhTBwwWjjMEhYIb-zTLUuKJFKdedaeWiiM"
+            }
+        },
+        {
+            "_id": "3de60ef7-40af-4d9e-ab25-887e6d49a005",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "GET NOTIFICATION",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/chats/notification",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-08T15:35:38.105Z",
+            "modified": "2024-05-08T15:43:23.190Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ0NzgzNzYsImV4cCI6MTcxNDQ4NTU3Nn0.HGiPddiUihlzLjVZ5laot-xldQR9035c_0CAazI-X64"
+            }
+        },
+        {
+            "_id": "c07d9c18-78e9-44c9-b2f3-5ef3deeb0e3a",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "0bc606a9-c946-4a81-ad92-c3732b73e129",
+            "name": "DEAL STATUS",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/deals/18/7",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-05-08T15:35:38.106Z",
+            "modified": "2024-05-08T15:43:59.344Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ1MTc0NDYsImV4cCI6MTcxNDUyNDY0Nn0.4ZH9F1I0CeJ4oQRtbdwko2WuLMj54j5cebJ7JIkrvv8"
+            }
+        },
+        {
+            "_id": "3eb91a9f-42ef-4e03-bf0b-866a578f4b4b",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "UPDATE PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/3",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-05-08T15:35:38.107Z",
+            "modified": "2024-05-08T15:40:59.914Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"destornillador estrella\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzE0MTE0MDcxLCJleHAiOjE3MTQxMjEyNzF9.iDKkjw5rRswwVoV3r8oIK8zhir7fwC4H4rlp0AqKCeU"
+            }
+        },
+        {
+            "_id": "2546ccb9-d406-4d72-8671-3a109362d291",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "WRITE MESSAGE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/chats/28/5",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-05-08T15:35:38.108Z",
+            "modified": "2024-05-08T15:43:29.074Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"No me dejes en visto mariquita\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQxNjAwMzcsImV4cCI6MTcxNDE2NzIzN30.egKTTL5shsoskIMNb1DOwJeK8Niid0cn0MIbXY2_Unw"
+            }
+        },
+        {
+            "_id": "64161461-396d-484b-bb67-9667906a0b0e",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "ERASE NOTIFICATION",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/chats/notification/7/8",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-05-08T15:35:38.109Z",
+            "modified": "2024-05-08T15:43:35.380Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0Nzk5MTYsImV4cCI6MTcxNDQ4NzExNn0.LBQgogdQBC5S_8l12SRu1crKZWUAL_hzy15MZ9anG5o"
+            }
+        },
+        {
+            "_id": "007ff433-2500-407d-81cd-5e6ee41d0f98",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "UPDATE USER ROLE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users/6/role",
+            "method": "PUT",
+            "sortNum": 32500,
+            "created": "2024-05-08T15:35:38.110Z",
+            "modified": "2024-05-08T15:42:32.406Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"role\": \"admin\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "ce29fccc-393f-475d-9bb3-d235af0dae55",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "DELETE PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/90",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-05-08T15:35:38.111Z",
+            "modified": "2024-05-08T15:41:06.544Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzEzOTk0MTIzLCJleHAiOjE3MTQwMDEzMjN9.9gSQKuRA5Wb8uloIW3Em2x5nDMrOwY9rG2ONrlTPvDo"
+            }
+        },
+        {
+            "_id": "4f18133e-7718-434c-ad39-3c36be45d99e",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "ADD PRODUCT TO FAVORITE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/favorite/3",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-05-08T15:35:38.112Z",
+            "modified": "2024-05-08T15:41:12.197Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1ODUzMTQsImV4cCI6MTcxNDU5MjUxNH0.51rSlWyfJ-2pY9CuKzUJCCU3nSu4JTe5Zt3V4JvDmUA"
+            }
+        },
+        {
+            "_id": "b127b6b4-4662-450a-ab4a-2d3797d9bcce",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "15bca469-f517-453c-a256-f20027509bf1",
+            "name": "DELETE MESSAGE",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/chats/4",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-05-08T15:35:38.113Z",
+            "modified": "2024-05-08T15:43:41.201Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQxNjAwMzcsImV4cCI6MTcxNDE2NzIzN30.egKTTL5shsoskIMNb1DOwJeK8Niid0cn0MIbXY2_Unw"
+            }
+        },
+        {
+            "_id": "c27c8e22-fdc0-480f-a697-b179b45432b6",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "GET USER BY ID",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users/3",
+            "method": "GET",
+            "sortNum": 45000,
+            "created": "2024-05-08T15:35:38.114Z",
+            "modified": "2024-05-08T15:42:37.601Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "d7dda886-39a9-4000-a6c0-758747fc184a",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "REVIEW A PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/review/18",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-05-08T15:35:38.115Z",
+            "modified": "2024-05-08T15:41:16.462Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"description\": \"Herramienta en mal estado. Todo un desastre\",\n  \"starts\": \"5\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1NzkyNzAsImV4cCI6MTcxNDU4NjQ3MH0.B531UztSnI1-FvgQSjLCFOkHvfYyzR4nKrIhjvzU_a8"
+            }
+        },
+        {
+            "_id": "4c6ca7c2-cf7c-4856-9e6a-558e355dfe74",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET FAVORITES OF A PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/favorites/13",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-05-08T15:35:38.116Z",
+            "modified": "2024-05-08T15:41:22.162Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1OTY5MjMsImV4cCI6MTcxNDYwNDEyM30.8RsEijdZQ6-YsakCZ5DTn8qO8g97PC61HgQcqhOJyjk"
+            }
+        },
+        {
+            "_id": "3b2c3213-c111-4740-ab6c-36da938d66b8",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "cc93c670-7d3a-46aa-970e-f471d147e0ca",
+            "name": "UPDATE USER PROFILE BY ID",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/users/6",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-05-08T15:35:38.117Z",
+            "modified": "2024-05-08T15:42:42.142Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"city\": \"requena\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "c47acdfc-4e06-44fc-a6a9-9406f9a632e5",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET PRODUCT REVIEWS",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/reviews/8",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-08T15:35:38.118Z",
+            "modified": "2024-05-08T15:41:27.111Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoiYWRtaW4iLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNzE0MTI4MTIzLCJleHAiOjE3MTQxMzUzMjN9.2JlJETxzxGYYl1pVSfMALxfFHEzUy8NpDDwbHum1ehE"
+            }
+        },
+        {
+            "_id": "f660460b-bc2b-4fb0-b92a-b52e09db3772",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET USER FAVORITE PRODUCT",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/favorites/user",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-08T15:35:38.119Z",
+            "modified": "2024-05-08T15:41:32.219Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1OTY5MjMsImV4cCI6MTcxNDYwNDEyM30.8RsEijdZQ6-YsakCZ5DTn8qO8g97PC61HgQcqhOJyjk"
+            }
+        },
+        {
+            "_id": "f20f5591-7663-40c1-afc4-80486de5f922",
+            "colId": "43f8f174-eee3-4f27-94a5-3f23fc3d6478",
+            "containerId": "487ec3cc-b3e4-4d6e-94c7-3e34294061a8",
+            "name": "GET CATEGORY PRODUCTS",
+            "url": "https://fsd-final-project-backend-production.up.railway.app/api/products/category/1",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-05-08T15:35:38.120Z",
+            "modified": "2024-05-08T15:41:38.281Z",
+            "headers": []
+        }
+    ],
+    "ref": "u_wTCI6L5g9erjoEpaHeCzmMdSqOd35kdGHDX-FffWGmtd2IPL6IkK3_TnJxZb8lEo75NnOPEYYkMhDlPBWJBw"
+}

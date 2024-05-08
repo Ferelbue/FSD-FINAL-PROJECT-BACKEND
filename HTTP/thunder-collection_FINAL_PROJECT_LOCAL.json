@@ -1,0 +1,601 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "FINAL_PROJECT_LOCAL",
+    "collectionId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+    "dateExported": "2024-05-08T15:00:21.250Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "56aa919d-0794-44e7-b8d7-14ae75a0217c",
+            "name": "AUTH ",
+            "containerId": "",
+            "created": "2024-04-20T17:18:45.079Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "PRODUCTS",
+            "containerId": "",
+            "created": "2024-04-21T15:53:05.516Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "USERS ",
+            "containerId": "",
+            "created": "2024-04-23T18:26:58.889Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "MESSAGES",
+            "containerId": "",
+            "created": "2024-04-26T15:49:21.160Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "16e062e5-f482-450a-9520-f1b509458e48",
+            "name": "DEALS",
+            "containerId": "",
+            "created": "2024-04-26T21:20:58.922Z",
+            "sortNum": 50000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "32eca589-263f-44a8-968c-7f091de02792",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET ALL PRODUCT",
+            "url": "http://localhost:4000/api/products?name=a&limit=2&page=1",
+            "method": "GET",
+            "sortNum": 5000,
+            "created": "2024-04-21T15:53:05.519Z",
+            "modified": "2024-04-24T20:57:05.111Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "a",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "72f6f90d-24da-41e7-8ed1-8de947a895dc",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET PRODUCT BY ID",
+            "url": "http://localhost:4000/api/products/2",
+            "method": "GET",
+            "sortNum": 7500,
+            "created": "2024-04-21T15:53:05.519Z",
+            "modified": "2024-04-30T08:03:44.947Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0NjMyODEsImV4cCI6MTcxNDQ3MDQ4MX0.C1AiC9D3cixrEz3Nnl5_pzkmVwxMWEEqVz5ipjGsD54"
+            }
+        },
+        {
+            "_id": "4b2ea87e-02af-4aa2-a9d5-3e1004cd87f1",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "56aa919d-0794-44e7-b8d7-14ae75a0217c",
+            "name": "CREATE REGISTER",
+            "url": "http://localhost:4000/api/auth/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-04-20T17:18:45.082Z",
+            "modified": "2024-05-05T18:27:55.755Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Javsi\",\n  \"lastName\": \"Persez\",\n  \"email\": \"dana@dana.com\",\n  \"city\": \"Valencia\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e76ad4ea-35fd-4514-bd82-1e8ce5b41766",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "CREATE PRODUCT",
+            "url": "http://localhost:4000/api/products",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-04-21T15:53:05.519Z",
+            "modified": "2024-04-24T21:48:16.162Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"destornillador plano\",\n  \"description\": \"Mango de madera. Punta de 5mm.\",\n  \"image\": \"https://torno-fresa.com/wp-content/uploads/2022/10/16a0ffbcd4e0333f.jpg\",\n  \"city\": \"Valencia\",\n  \"hourPrice\": \"1\",\n  \"dayPrice\": \"5\",\n  \"depositPrice\": \"10\",\n  \"category\" : \"2\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzEzOTk0MTIzLCJleHAiOjE3MTQwMDEzMjN9.9gSQKuRA5Wb8uloIW3Em2x5nDMrOwY9rG2ONrlTPvDo"
+            }
+        },
+        {
+            "_id": "08a0031f-303a-4c7e-8dc3-3b0f9971184e",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "GET USER PROFILE",
+            "url": "http://localhost:4000/api/users/profile",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-04-23T18:26:58.893Z",
+            "modified": "2024-05-03T09:26:30.550Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ3MjgzNzgsImV4cCI6MTcxNDczNTU3OH0.CElW-a9epd8EuGU7E3yeI6p0nz758VRjv7D0lHJQE4w"
+            }
+        },
+        {
+            "_id": "d3a47701-b781-42a1-b575-180e0b78549f",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "GET ALL USER CHATS",
+            "url": "http://localhost:4000/api/chats",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-04-26T15:49:31.355Z",
+            "modified": "2024-04-30T11:07:35.351Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0NzA3ODUsImV4cCI6MTcxNDQ3Nzk4NX0.5HlS5b8cCS7CRLtogkJO-xLPE6mEEEtHtOHo-uJyW_4"
+            }
+        },
+        {
+            "_id": "5675be2c-b0dc-4d14-92b7-82302215a52b",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "16e062e5-f482-450a-9520-f1b509458e48",
+            "name": "UPDATE DEAL",
+            "url": "http://localhost:4000/api/deals/18/7",
+            "method": "PUT",
+            "sortNum": 10000,
+            "created": "2024-04-26T21:21:12.226Z",
+            "modified": "2024-04-30T22:51:37.966Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ1MTc0NDYsImV4cCI6MTcxNDUyNDY0Nn0.4ZH9F1I0CeJ4oQRtbdwko2WuLMj54j5cebJ7JIkrvv8"
+            }
+        },
+        {
+            "_id": "021c5a97-10f3-4300-9eda-63f6cdbb96e1",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "UPLOAD IMAGE",
+            "url": "http://localhost:4000/api/products/image",
+            "method": "POST",
+            "sortNum": 13750,
+            "created": "2024-05-02T10:54:26.858Z",
+            "modified": "2024-05-02T10:57:49.436Z",
+            "headers": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "image",
+                        "value": "c:\\Users\\ferel\\Desktop\\FSD\\3-PROYECTOS\\PROYECTO_FINAL\\FRONTEND\\finalProject\\public\\chat.png"
+                    }
+                ]
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ2NDczMjgsImV4cCI6MTcxNDY1NDUyOH0.tiYe87e7Q9QJGC5DS0NUl3tY15bPdbCqWdmnoPQk15A"
+            }
+        },
+        {
+            "_id": "a9ae69a9-7e4f-4ce6-8af5-c283f60775a5",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "UPDATE USER PROFILE",
+            "url": "http://localhost:4000/api/users/profile",
+            "method": "PUT",
+            "sortNum": 15000,
+            "created": "2024-04-23T18:26:58.893Z",
+            "modified": "2024-04-24T20:46:27.428Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"city\": \"requena\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "f484a9f2-e935-4eeb-8ca5-81c16552d6b0",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "GET ALL USERS",
+            "url": "http://localhost:4000/api/users?email=&limit=2&page=2",
+            "method": "GET",
+            "sortNum": 17500,
+            "created": "2024-04-23T18:26:58.893Z",
+            "modified": "2024-05-04T16:04:54.161Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "email",
+                    "value": "",
+                    "isPath": false
+                },
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoiYWRtaW4iLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNzE0ODM4NjYwLCJleHAiOjE3MTQ4NDU4NjB9.vUf7PLlJa8JkVEgiyIlme8Vqxt9VT7DO9mGFxmnSKrE"
+            }
+        },
+        {
+            "_id": "fb732ec2-bb20-4fe1-8c9a-04567c4faa0f",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET MY PRODUCTS",
+            "url": "http://localhost:4000/api/products/own",
+            "method": "GET",
+            "sortNum": 17500,
+            "created": "2024-04-24T21:19:17.734Z",
+            "modified": "2024-04-24T21:28:54.279Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzEzOTk0MTIzLCJleHAiOjE3MTQwMDEzMjN9.9gSQKuRA5Wb8uloIW3Em2x5nDMrOwY9rG2ONrlTPvDo"
+            }
+        },
+        {
+            "_id": "0ededfb9-43ec-4879-9c2a-6b43b1dfd7b9",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "56aa919d-0794-44e7-b8d7-14ae75a0217c",
+            "name": "USER LOGIN",
+            "url": "http://localhost:4000/api/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-04-20T17:18:45.082Z",
+            "modified": "2024-05-04T11:21:45.840Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"admin@admin.com\",\n  \"password\": \"123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "03b45a2b-9d24-4f69-8e17-64d231ab42a2",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "DELETE USER BY ID",
+            "url": "http://localhost:4000/api/users/8",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2024-04-23T18:26:58.893Z",
+            "modified": "2024-04-23T21:14:24.245Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTM5MDY4NDksImV4cCI6MTcxMzkxNDA0OX0.OEjv0TqvSlmh-myEbCz8YYbQgXwjWOZKNkL-iXSBBzc"
+            }
+        },
+        {
+            "_id": "dcd05ec7-8465-4579-9046-a5e2001c375d",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "GET MESSAGES BY PRODUCT AND USER",
+            "url": "http://localhost:4000/api/chats/3/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-26T18:19:10.469Z",
+            "modified": "2024-04-29T18:16:19.315Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0MTI5MzIsImV4cCI6MTcxNDQyMDEzMn0.XiTP1zJSMlhTBwwWjjMEhYIb-zTLUuKJFKdedaeWiiM"
+            }
+        },
+        {
+            "_id": "45173a2c-040c-4d77-9ec9-cd53bc2ffccf",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "GET NOTIFICATION",
+            "url": "http://localhost:4000/api/chats/notification",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-30T09:10:04.160Z",
+            "modified": "2024-04-30T11:59:47.893Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ0NzgzNzYsImV4cCI6MTcxNDQ4NTU3Nn0.HGiPddiUihlzLjVZ5laot-xldQR9035c_0CAazI-X64"
+            }
+        },
+        {
+            "_id": "6757f932-84f2-4dc6-9617-19dc521c5b82",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "16e062e5-f482-450a-9520-f1b509458e48",
+            "name": "DEAL STATUS",
+            "url": "http://localhost:4000/api/deals/18/7",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-04-30T22:21:30.045Z",
+            "modified": "2024-04-30T22:50:53.832Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ1MTc0NDYsImV4cCI6MTcxNDUyNDY0Nn0.4ZH9F1I0CeJ4oQRtbdwko2WuLMj54j5cebJ7JIkrvv8"
+            }
+        },
+        {
+            "_id": "f5544ee0-0168-4027-a8cf-daad5913f80e",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "UPDATE PRODUCT",
+            "url": "http://localhost:4000/api/products/3",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-04-21T15:53:05.519Z",
+            "modified": "2024-04-26T06:49:20.163Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"destornillador estrella\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzE0MTE0MDcxLCJleHAiOjE3MTQxMjEyNzF9.iDKkjw5rRswwVoV3r8oIK8zhir7fwC4H4rlp0AqKCeU"
+            }
+        },
+        {
+            "_id": "f9d485fc-beec-42b7-9f9d-b48b7d92c826",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "WRITE MESSAGE",
+            "url": "http://localhost:4000/api/chats/28/5",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-04-26T19:27:18.022Z",
+            "modified": "2024-04-26T21:05:41.286Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"message\": \"No me dejes en visto mariquita\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQxNjAwMzcsImV4cCI6MTcxNDE2NzIzN30.egKTTL5shsoskIMNb1DOwJeK8Niid0cn0MIbXY2_Unw"
+            }
+        },
+        {
+            "_id": "2ce5f00e-c3da-4061-a7c7-829aced76275",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "ERASE NOTIFICATION",
+            "url": "http://localhost:4000/api/chats/notification/7/8",
+            "method": "PUT",
+            "sortNum": 30000,
+            "created": "2024-04-30T12:24:25.397Z",
+            "modified": "2024-04-30T12:25:27.297Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQ0Nzk5MTYsImV4cCI6MTcxNDQ4NzExNn0.LBQgogdQBC5S_8l12SRu1crKZWUAL_hzy15MZ9anG5o"
+            }
+        },
+        {
+            "_id": "dbd982ec-1a95-4904-a7eb-f636799fc1d9",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "UPDATE USER ROLE",
+            "url": "http://localhost:4000/api/users/6/role",
+            "method": "PUT",
+            "sortNum": 32500,
+            "created": "2024-04-23T18:26:58.893Z",
+            "modified": "2024-04-24T20:47:07.227Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"role\": \"admin\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "b5aa56dd-f33a-4bc7-a855-d9dff12a2fbf",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "DELETE PRODUCT",
+            "url": "http://localhost:4000/api/products/90",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-04-21T15:53:05.519Z",
+            "modified": "2024-04-24T22:32:30.855Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJyb2xlTmFtZSI6InVzZXIiLCJ1c2VyTmFtZSI6IkphdnNpIiwiaWF0IjoxNzEzOTk0MTIzLCJleHAiOjE3MTQwMDEzMjN9.9gSQKuRA5Wb8uloIW3Em2x5nDMrOwY9rG2ONrlTPvDo"
+            }
+        },
+        {
+            "_id": "f0801536-1587-4646-a872-ee0377db7ffa",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "ADD PRODUCT TO FAVORITE",
+            "url": "http://localhost:4000/api/products/favorite/3",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-04-26T08:32:08.348Z",
+            "modified": "2024-05-01T18:14:56.937Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1ODUzMTQsImV4cCI6MTcxNDU5MjUxNH0.51rSlWyfJ-2pY9CuKzUJCCU3nSu4JTe5Zt3V4JvDmUA"
+            }
+        },
+        {
+            "_id": "cd07d20c-5a50-49e0-9de7-d5b75daef8fb",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "0cba1920-5c75-458e-9da4-f0297b19db41",
+            "name": "DELETE MESSAGE",
+            "url": "http://localhost:4000/api/chats/4",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2024-04-26T20:23:02.691Z",
+            "modified": "2024-04-26T20:41:22.544Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiRGF2aWQiLCJpYXQiOjE3MTQxNjAwMzcsImV4cCI6MTcxNDE2NzIzN30.egKTTL5shsoskIMNb1DOwJeK8Niid0cn0MIbXY2_Unw"
+            }
+        },
+        {
+            "_id": "6e7aadfb-d46f-4ea5-8c66-83e83605c83c",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "GET USER BY ID",
+            "url": "http://localhost:4000/api/users/3",
+            "method": "GET",
+            "sortNum": 45000,
+            "created": "2024-04-23T18:26:58.893Z",
+            "modified": "2024-04-24T20:47:29.257Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "de399cea-8f97-4fee-afc2-f8ec2e9691b5",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "REVIEW A PRODUCT",
+            "url": "http://localhost:4000/api/products/review/18",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-04-26T10:36:34.196Z",
+            "modified": "2024-05-01T16:01:42.075Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"description\": \"Herramienta en mal estado. Todo un desastre\",\n  \"starts\": \"5\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1NzkyNzAsImV4cCI6MTcxNDU4NjQ3MH0.B531UztSnI1-FvgQSjLCFOkHvfYyzR4nKrIhjvzU_a8"
+            }
+        },
+        {
+            "_id": "1976476d-1998-4e6e-b9e4-e52d7f1459ce",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET FAVORITES OF A PRODUCT",
+            "url": "http://localhost:4000/api/products/favorites/13",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-04-26T11:14:03.763Z",
+            "modified": "2024-05-01T20:55:35.095Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1OTY5MjMsImV4cCI6MTcxNDYwNDEyM30.8RsEijdZQ6-YsakCZ5DTn8qO8g97PC61HgQcqhOJyjk"
+            }
+        },
+        {
+            "_id": "ffe6d805-2961-48a0-affb-19a64b467480",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "2812b2f6-4a54-4ca9-8c2f-280b9cd5a720",
+            "name": "UPDATE USER PROFILE BY ID",
+            "url": "http://localhost:4000/api/users/6",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-04-23T21:52:35.408Z",
+            "modified": "2024-04-24T20:46:13.157Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"city\": \"requena\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoic3VwZXItYWRtaW4iLCJ1c2VyTmFtZSI6InN1cGVyIiwiaWF0IjoxNzEzOTkxNTAyLCJleHAiOjE3MTM5OTg3MDJ9.1viYCWSi6A0gQY50DDc8pfU7L_m6VnYVapiVbDLpzRs"
+            }
+        },
+        {
+            "_id": "23765862-6604-419d-b0b0-15eb0e1716da",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET PRODUCT REVIEWS",
+            "url": "http://localhost:4000/api/products/reviews/8",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-04-26T11:34:11.268Z",
+            "modified": "2024-04-26T11:36:25.864Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoiYWRtaW4iLCJ1c2VyTmFtZSI6ImFkbWluIiwiaWF0IjoxNzE0MTI4MTIzLCJleHAiOjE3MTQxMzUzMjN9.2JlJETxzxGYYl1pVSfMALxfFHEzUy8NpDDwbHum1ehE"
+            }
+        },
+        {
+            "_id": "f55652df-21c2-4259-a1cc-402db64b3468",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET USER FAVORITE PRODUCT",
+            "url": "http://localhost:4000/api/products/favorites/user",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-05-01T17:40:36.726Z",
+            "modified": "2024-05-01T21:39:56.446Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInJvbGVOYW1lIjoidXNlciIsInVzZXJOYW1lIjoiUnViZW4iLCJpYXQiOjE3MTQ1OTY5MjMsImV4cCI6MTcxNDYwNDEyM30.8RsEijdZQ6-YsakCZ5DTn8qO8g97PC61HgQcqhOJyjk"
+            }
+        },
+        {
+            "_id": "f21cb110-0af3-4d81-8019-8cfd609307a1",
+            "colId": "60af29c0-0975-4d3a-876f-788bc66a867d",
+            "containerId": "5bea98bf-2b06-4a5b-817c-b81168e1a657",
+            "name": "GET CATEGORY PRODUCTS",
+            "url": "http://localhost:4000/api/products/category/1",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-04-26T11:46:23.812Z",
+            "modified": "2024-04-28T23:19:01.665Z",
+            "headers": []
+        }
+    ],
+    "ref": "FPvdddsCTETOu9OkFIEs3E6I0aRgIvVvynzc97ILneh_po8LfZsWNSRvMXt78_2xIZz9E31u__NLD-UpTqrrPQ"
+}
