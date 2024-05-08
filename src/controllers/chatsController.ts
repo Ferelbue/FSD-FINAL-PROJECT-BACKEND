@@ -515,10 +515,23 @@ export const BringAllMessages = async (req: Request, res: Response) => {
     try {
         const userRole = req.tokenData.roleName;
 
+        const limit = Number(req.query.limit) || 100;
+        const page = Number(req.query.page) || 1;
+        const skip = (page - 1) * limit;
+
+        interface queryFilters {
+            message?: FindOperator<string>
+        }
+        const queryFilters: queryFilters = {}
+        if (req.query.message) {
+            queryFilters.message = Like("%" + req.query.message.toString() + "%");
+        }
+
         if (userRole !== "user") {
 
             const messages = await Message.find(
                 {
+                    where: queryFilters,
                     relations: {
                         userOwner: true,
                         userUser: true,
@@ -531,7 +544,9 @@ export const BringAllMessages = async (req: Request, res: Response) => {
                         userUser: { id: true, name: true },
                         product: { id: true, name: true },
                         created_at: true
-                    }
+                    },
+                    take: limit,
+                    skip: skip
                 }
             )
             return res.status(200).json(
