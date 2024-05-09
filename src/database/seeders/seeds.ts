@@ -9,13 +9,13 @@ import { userSeedDatabase } from "./userSeeds";
 
 const seeder = async () => {
     try {
-        await roleSeedDatabase();
-        await userSeedDatabase();
-        await categorySeedDatabase();
+        // await roleSeedDatabase();
+        // await userSeedDatabase();
+        // await categorySeedDatabase();
         await productSeedDatabase();
-        await favoriteProductSeedDatabase();
-        await reviewSeedDatabase();
-        await messageSeedDatabase();
+        // await favoriteProductSeedDatabase();
+        // await reviewSeedDatabase();
+        // await messageSeedDatabase();
         // await dealSeedDatabase();
 
     } catch (error) {
