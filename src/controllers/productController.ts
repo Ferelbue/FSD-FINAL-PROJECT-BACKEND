@@ -16,10 +16,14 @@ export const getProducts = async (req: Request, res: Response) => {
 
         interface queryFilters {
             name?: FindOperator<string>
+            city?: FindOperator<string>
         }
         const queryFilters: queryFilters = {}
         if (req.query.name) {
             queryFilters.name = Like("%" + req.query.name.toString() + "%");
+        }
+        if (req.query.city) {
+            queryFilters.city = Like("%" + req.query.city.toString() + "%");
         }
 
         //Consultar en base de datos
