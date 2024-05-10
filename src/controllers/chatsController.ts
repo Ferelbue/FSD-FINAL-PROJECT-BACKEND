@@ -328,7 +328,8 @@ export const deleteMessage = async (req: Request, res: Response) => {
 
         if ((message.userOwner_author === true && message.userOwner.id === userId) ||
             (message.userUser_author === true && message.userUser.id === userId) ||
-            userRole === "admin") {
+            userRole === "admin" ||
+            userRole === "super-admin") {
 
             await Message.delete(parseInt(id))
             return res.status(200).json({
