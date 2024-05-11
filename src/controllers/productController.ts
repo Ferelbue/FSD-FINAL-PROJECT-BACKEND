@@ -776,23 +776,10 @@ export const categoryProducts = async (req: Request, res: Response) => {
     try {
         //RECUPERAR DATOS
         const categoryId = req.params.id
-        // PAGINACION Y FILTROS
-        const limit = Number(req.query.limit) || 10;
-        const page = Number(req.query.page) || 1;
-        const skip = (page - 1) * limit;
 
-        interface queryFilters {
-            name?: FindOperator<string>
-        }
-        const queryFilters: queryFilters = {}
-        if (req.query.name) {
-            queryFilters.name = Like("%" + req.query.name.toString() + "%");
-        }
-        //Consultar y recuperar de la DB
         const products = await Product.find(
             {
                 where: {
-                    ...queryFilters,
                     category: { id: parseInt(categoryId) }
                 },
                 relations: [
@@ -811,9 +798,7 @@ export const categoryProducts = async (req: Request, res: Response) => {
                     totalReviews: true,
                     category: { id: true, name: true },
                     owner: { id: true, name: true }
-                },
-                take: limit,
-                skip: skip
+                }
             }
         )
 
