@@ -134,7 +134,7 @@ The project consists of a tool rental app. Where users can search and upload too
     ```
 
 - #### Thunder Client :zap:
-  - [Open this file in Thunder client extension and test de API ](./HTTP/thunder-collection_FINAL_PROJECT_LOCAL.json)
+  - [Open this file in Thunder client extension and test de API ](./HTTP/thunder-collection_FINAL_PROJECT_ONLINE.json)
 
 ---
 
