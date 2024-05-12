@@ -1,5 +1,13 @@
-# :wrench:TOOL-RENT API :wrench: 
+# :wrench:TOOL-RENT API :wrench:
 
+---
+
+<div align="center">
+
+![Vídeo sin título ‐ Hecho con Clipchamp (2)](https://github.com/Ferelbue/FSD-FINAL-PROJECT-BACKEND/assets/154675938/e4ab5f2b-d874-46e3-a941-0a474722099b)
+
+ </div>
+ 
 This is the backend of the final project of the Fullstack Developer Bootcamp, which showcases real-world backend development skills with TypeScript and Express.
 The project consists of a tool rental app. Where users can search and upload tools to rent. The app has a chat where users can talk and discuss details with the owner of the product.
 
@@ -40,12 +48,12 @@ The project consists of a tool rental app. Where users can search and upload too
 ## Features :star2:
 
 - **Online chat:** Concrete details between users.💬
-- **Real notification system:** User receives notifications when he has a new comment.🔴 
+- **Real notification system:** User receives notifications when he has a new comment.🔴
 - **Add favorite products:** List of favorite products. ❤️
-- **No registered functions:** It is not necessary to be logged-in to view certain parts of the app.👀
+- **No registered functions:** It is not necessary to be logged-in to explore certain parts of the app.👀
 - **Endpoints test:** Thunder collection file.👌
 - **User Authentication:** Secure signup and login processes. 🔒
-- **Admin and SuperAdmin CRUD Endpoints:** Full control over users, appointments and services for administrators. 👩‍💼👨‍💼
+- **Admin and SuperAdmin CRUD Endpoints:** Full control over users, products and messages for administrators. 👩‍💼👨‍💼
 - **Acurate Documentation:** Fully documented API endpoints. 📚
 - **Docker Container:** Easy setup and deployment with Docker. 🐳
 - **MySQL Database with TypeORM and Migrations:** Robust database management. 🗄️
@@ -205,269 +213,201 @@ The project consists of a tool rental app. Where users can search and upload too
 
 (Click to expand)
 
-<details>
+  <details>
   <summary style="font-weight: bold; font-size: 1.3em;">Public Endpoints</summary>
 
 - `GET /api/products` - List all products.
   <details>
-    <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
   - It is possible to filter by product name adding to the endpoint: <br>
     - /api/products + (?name=name)(can be only a character)<br>
   - Added pagination. By default: limit=10 and page=1. Possibility to modify adding: <br>
     - /api/products + /api/products?limit=5&page=3<br>
   - Anyone with an internet connection can visit the app.
-
   </details>
 
 - `GET /api/products/:id` - Detail of a product.
   <details>
-    <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
   - Anyone with an internet connection can visit the app.
-
   </details>
 
 - `GET /api/products/category/:id` - All products by category.
   <details>
-    <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
   - Anyone with an internet connection can visit the app.
-
+  </details>
   </details>
 
-</details>
-
 <details>
-  <summary style="font-weight: bold; font-size: 1.3em;">User Endpoints</summary>
+<summary style="font-weight: bold; font-size: 1.3em;">User Endpoints</summary>
   
 ##### Authentication 🔒
 
 - `POST /api/auth/register` - Register a new user.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
-    - Forbidden to repeat an email address already registered. <br>
-    - Last name not mandatory.
-
-    </details>
-
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
-        {
-          "name": "Pepe",
-          "lastName": "Perez",
-          "email": "pepe@pepe.com",
-          "city": "Valencia",
-          "password": "123456"
-        }
-
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Forbidden to repeat an email address already registered. <br>
+  - Last name not mandatory.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
+  {
+  "name": "Pepe",
+  "lastName": "Perez",
+  "email": "pepe@pepe.com",
+  "city": "Valencia",
+  "password": "123456"
+  }
+  </details>
 
 - `POST /api/auth/login` - Login an existing user.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
   - Mandatory to be already registered in the aplication.<br>
   - Mandatory to introduce the email and password successfully.
-
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
-        {
-          "email": "pepe@pepe.com",
-          "password": "123456"
-        }
-    </details>
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
+  {
+    "email": "pepe@pepe.com",
+    "password": "123456"
+  }
+  </details>
 
 ##### Users 👤
 
 - `GET /api/users/profile` - Retrieve authenticated user's profile.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
-    - Mandatory to be logged previusly.<br>
-    - Forbiden to see others profiles.
-
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
-    - Mandatory to send the token in the Bearer Authentication.
-
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.<br>
+  - Forbiden to see others profiles.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  - Mandatory to send the token in the Bearer Authentication.
+  </details>
 
 - `PUT /api/users/profile` - Update authenticated user's profile.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
-    - Mandatory to be logged previusly.<br>
-    - Forbiden to update others profiles.<br>
-    - The user can modify whatever he wants (name, last name or city). At the same time or separately.<br>
-
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
-    - Mandatory to send the token in the Bearer Authentication.
-
-    </details>
-
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
-        { THIS IS AN EXAMPLE. CAN BE MODIFIED SEPARATELY
-          "firstName": "Pepe",
-          "lastName": "Perez",
-          "city": "Valencia"
-        }
-
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.<br>
+  - Forbiden to update others profiles.<br>
+  - The user can modify whatever he wants (name, last name or city). At the same time or separately.<br>
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  - Mandatory to send the token in the Bearer Authentication.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
+    { THIS IS AN EXAMPLE. CAN BE MODIFIED SEPARATELY
+      "firstName": "Pepe",
+      "lastName": "Perez",
+      "city": "Valencia"
+    }
+  </details>
 
 ##### Products 📅
 
 - `POST /api/products` - Create a product.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
   </details>
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
-        {
-        "name": "destornillador plano",
-        "description": "Mango de madera. Punta de 5mm.",
-        "image": "https://torno-fresa.com/wp-content/uploads/2022/10/16a0ffbcd4e0333f.jpg",
-        "city": "Valencia",
-        "hourPrice": "1",
-        "dayPrice": "5",
-        "depositPrice": "10",
-        "category" : "2"
-        }
-
-      </details>
+  {
+    "name": "destornillador plano",
+    "description": "Mango de madera. Punta de 5mm.",
+    "image": "https://torno-fresa.com/wp-content/uploads/2022/10/16a0ffbcd4e0333f.jpg",
+    "city": "Valencia",
+    "hourPrice": "1",
+    "dayPrice": "5",
+    "depositPrice": "10",
+    "category" : "2"
+  }
+  </details>
 
 - `PUT /api/products/:id` - Update a product.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-  
   </details>
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
-        {
-        "name": "destornillador estrella"
-        }
-
-      </details>
+  {
+  "name": "destornillador estrella"
+  }
+  </details>
 
 - `POST /api/products/favorite/:id` - Add/remove a product from favorites.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-
   </details>
 
 - `POST /api/products/review/:id` - Add/remove a product from favorites.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
-  - Mandatory to send the token in the Bearer Authentication.
-
+    - Mandatory to send the token in the Bearer Authentication.
   </details>
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
         {
             "description": "Herramienta en mal estado. Todo un desastre",
             "starts": "5"
-        }   
-
-    </details>
+        }
+  </details>
 
 - `POST /api/products/image` - Create a product.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-
   </details>
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
-    - FORM -> image
-
-    </details>
+  - FORM -> image
+  </details>
 
 - `GET /api/products/own` - Retrieve my upload products.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-
   </details>
 
 - `GET /api/products/favorites/user` - Retrieve my favorites products.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-
   </details>
 
 
@@ -475,206 +415,151 @@ The project consists of a tool rental app. Where users can search and upload too
 
 - `GET /api/chats` - Get all user chats.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
   </details>
- 
 
 - `GET /api/chats/:userId/:productId` - Get messages by product and user.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-  
   </details>
 
 - `GET /api/chats/notification` - Get notification.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-  
   </details>
-
 
 - `POST /api/chats/:userId/:productId` - Write a message by product and user.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-
   </details>
-    <details>
+  <details>
   <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
-
         {
         "message": "Esto es un ejemplo"
-        } 
-
-    </details>
+        }
+  </details>
 
 - `PUT /api/chats/notification/:userId/:productId` - Erase notification.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-
   </details>
 
 ##### Deals 📅
 
 - `GET /api/deals/:userId/:productId` - Get deal status by product and user.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
   </details>
- 
 
 - `PUT /api/chats/:userId/:productId` - Update deal by product and user.
   <details>
-  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
-
-    - Mandatory to be logged previusly.
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly.
   </details>
-
   <details>
   <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-
   - Mandatory to send the token in the Bearer Authentication.
-  
   </details>
+
 </details>
 
-
-
-
-
-
 <details>
-    <summary style="font-weight: bold; font-size: 1.3em;">Admin endpoints</summary>
+  <summary style="font-weight: bold; font-size: 1.3em;">Admin endpoints</summary>
 
 ##### Users 👩‍💼👨‍💼
 
 - `GET /api/users/:id` - Retrieve any user profile.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
-        - Mandatory to be logged previusly and be admin.<br>
-        - Mandatory to send the user ID in the endpoint.
-
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-        Mandatory to send the token in the Bearer Authentication.
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly and be admin.<br>
+  - Mandatory to send the user ID in the endpoint.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  Mandatory to send the token in the Bearer Authentication.
+  </details>
 
 - `GET /api/users` - Retrieve all users.
   <details>
-    <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
   - It is possible to filter by user email adding to the endpoint: <br>
     - /api/users + (?email=email)(can be only a character)<br>
   - Added pagination. By default: limit=10 and page=1. Possibility to modify adding: <br>
     - /api/users + /api/users?limit=5&page=3<br>
   - Anyone with an internet connection can visit the app.<br>
-
   </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-        Mandatory to send the token in the Bearer Authentication.
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  Mandatory to send the token in the Bearer Authentication.
+  </details>
 
 - `DELETE /api/users/:id` - Delete any user profile.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
-        - Mandatory to be logged previusly and be admin.<br>
-        - Mandatory to send the user ID in the endpoint.
-
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-        Mandatory to send the token in the Bearer Authentication.
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly and be admin.<br>
+  - Mandatory to send the user ID in the endpoint.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  Mandatory to send the token in the Bearer Authentication.
+  </details>
 
 ##### Products 📅
 
-
 - `GET /api/product` - Retrieve all products.
   <details>
-    <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
   - It is possible to filter by user name adding to the endpoint: <br>
-    - /api/products + (?name=name)(can be only a character)<br>
+  - /api/products + (?name=name)(can be only a character)<br>
   - Added pagination. By default: limit=10 and page=1. Possibility to modify adding: <br>
-    - /api/products + /api/products?limit=5&page=3<br>
+  - /api/products + /api/products?limit=5&page=3<br>
   - Anyone with an internet connection can visit the app.<br>
-
   </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-        Mandatory to send the token in the Bearer Authentication.
-    </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  Mandatory to send the token in the Bearer Authentication.
+  </details>
 
 - `DELETE /api/users/:id` - Delete any user profile.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-
-        - Mandatory to be logged previusly and be admin.<br>
-        - Mandatory to send the user ID in the endpoint.
-
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-        Mandatory to send the token in the Bearer Authentication.
-    </details>
-
-
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
+  - Mandatory to be logged previusly and be admin.<br>
+  - Mandatory to send the user ID in the endpoint.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+    Mandatory to send the token in the Bearer Authentication.
+  </details>
 </details>
 
 <details>
@@ -683,24 +568,24 @@ The project consists of a tool rental app. Where users can search and upload too
 ##### Users 👩‍💼👨‍💼
 
 - `PUT /api/users/:id/role` - Update user role.
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary>
-        - Mandatory to be logged previusly and be super-admin.<br>
-        - Mandatory to send the user ID in the endpoint.
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
-        Mandatory to send the token in the Bearer Authentication.
-    </details>
-    <details>
-      <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">FEATURES</summary> 
+  - Mandatory to be logged previusly and be super-admin.<br> 
+  - Mandatory to send the user ID in the endpoint.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">TOKEN</summary>
+  Mandatory to send the token in the Bearer Authentication.
+  </details>
+  <details>
+  <summary style="font-weight: bold; font-size: 0.8em;">BODY</summary>
 
-      {
-        "role": "2"
-      }
-</details>
-</details>
+        {
+          "role": "2"
+        }
 
+  </details>
+</details>
 
 ---
 
